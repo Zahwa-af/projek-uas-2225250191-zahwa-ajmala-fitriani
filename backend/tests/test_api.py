@@ -144,6 +144,12 @@ def test_progres_dan_guru(klien):
     assert g["siswa"][0]["refleksi"] == ["Hitung luas dulu."]
 
 
+def test_guru_nonaktif_tanpa_pin(tmp_path):
+    app = buat_app({"DB_PATH": str(tmp_path / "uji.db"), "PIN_GURU": None})
+    r = app.test_client().post("/api/guru", json={"kode_kelas": "8A", "pin": ""})
+    assert r.status_code == 403 and "belum diaktifkan" in r.get_json()["galat"]
+
+
 def test_latihan(klien):
     soal = klien.get("/api/latihan/pilah").get_json()
     assert all("kunci" not in s for s in soal)

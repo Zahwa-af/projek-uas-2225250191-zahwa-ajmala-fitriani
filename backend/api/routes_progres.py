@@ -64,7 +64,9 @@ def progres(sesi_id: str):
 @bp.post("/guru")
 def rekap_guru():
     data = data_json()
-    pin_benar = current_app.config["PIN_GURU"]
+    pin_benar = current_app.config.get("PIN_GURU")
+    if not pin_benar:
+        raise GalatApi("Halaman guru belum diaktifkan. Atur SEGIPINTAR_PIN_GURU di server.", 403)
     if not hmac.compare_digest(str(data.get("pin") or ""), pin_benar):
         raise GalatApi("PIN guru salah.", 403)
     kelas = teks_wajib(data, "kode_kelas", "Kode kelas", 20).upper()

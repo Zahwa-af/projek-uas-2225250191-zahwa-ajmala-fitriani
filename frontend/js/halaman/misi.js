@@ -4,7 +4,7 @@ import { api } from "../api.js";
 import { barBawah, bintangTeks, el, fmt, kotakUmpan, tombol } from "../dom.js";
 import { buatKomponen } from "../langkah.js";
 import { gambar } from "../segitiga-svg.js";
-import { ambilSesi } from "../state.js";
+import { ambilSesi, simpanSesi } from "../state.js";
 import { INGAT_LAGI, LENCANA_IKON } from "../teks.js";
 
 const KODE_SALAH_HITUNG = new Set(["SALAH_HITUNG", "SALAH_DESIMAL"]);
@@ -49,8 +49,18 @@ export async function halamanDaftarMisi(app) {
 // ------------------------------------------------------------------ satu misi
 export async function halamanMisi(app, idTeks) {
   const id = Number(idTeks);
-  const sesi = ambilSesi();
-  const [misi, mulai] = await Promise.all([api.ambilMisi(id), api.mulaiMisi(id, sesi.sesi_id)]);
+  let sesi = ambilSesi();
+  const misi = await api.ambilMisi(id);
+  let mulai;
+  try {
+    mulai = await api.mulaiMisi(id, sesi.sesi_id);
+  } catch (e) {
+    // Database server bisa direset (misal di hosting gratis): buat ulang sesi dari data di HP.
+    if (e.status !== 404) throw e;
+    sesi = await api.buatSesi(sesi.nama_panggilan, sesi.kode_kelas);
+    simpanSesi(sesi);
+    mulai = await api.mulaiMisi(id, sesi.sesi_id);
+  }
 
   const st = {
     mainId: mulai.main_id,
