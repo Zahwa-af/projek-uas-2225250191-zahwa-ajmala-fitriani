@@ -1,0 +1,719 @@
+[
+  {
+    "id": 1,
+    "judul": "Bendera Kelas",
+    "indikator": "Mathematical Reasoning",
+    "indikator_singkat": "Menalar dan memberi alasan",
+    "lencana": "Penalar",
+    "cerita": [
+      "Panitia kelas akan membuat bendera berbentuk segitiga.",
+      "Desain A: alas 60 cm, tinggi 40 cm.",
+      "Desain B: alas 80 cm, tinggi 30 cm.",
+      "Kain hanya cukup untuk satu bendera dengan luas paling besar.",
+      "Desain mana yang sebaiknya dipilih?"
+    ],
+    "gambar": {
+      "tipe": "dua_segitiga",
+      "satuan": "cm",
+      "segitiga": [
+        { "nama": "Desain A", "alas": 60, "tinggi": 40, "puncak": 0.3 },
+        { "nama": "Desain B", "alas": 80, "tinggi": 30, "puncak": 0.3 }
+      ]
+    },
+    "langkah": [
+      {
+        "no": "1a",
+        "tahap": 1,
+        "skor": 0.5,
+        "tipe": "pilah",
+        "judul": "Diketahui",
+        "instruksi": "Tempatkan setiap ukuran ke kotak yang tepat.",
+        "gambar": {
+          "tipe": "dua_segitiga",
+          "satuan": "cm",
+          "tanpa_angka": true,
+          "segitiga": [
+            { "nama": "Desain A", "alas": 60, "tinggi": 40, "puncak": 0.3 },
+            { "nama": "Desain B", "alas": 80, "tinggi": 30, "puncak": 0.3 }
+          ]
+        },
+        "item": [
+          { "id": "u1", "teks": "60 cm" },
+          { "id": "u2", "teks": "40 cm" },
+          { "id": "u3", "teks": "80 cm" },
+          { "id": "u4", "teks": "30 cm" }
+        ],
+        "kotak": [
+          { "id": "a_alas", "label": "Alas A" },
+          { "id": "a_tinggi", "label": "Tinggi A" },
+          { "id": "b_alas", "label": "Alas B" },
+          { "id": "b_tinggi", "label": "Tinggi B" }
+        ],
+        "kunci": { "u1": "a_alas", "u2": "a_tinggi", "u3": "b_alas", "u4": "b_tinggi" },
+        "petunjuk": [
+          "Baca lagi kalimat ke-2 dan ke-3 pada cerita.",
+          "Desain A: alas 60 cm dan tinggi 40 cm. Sekarang coba Desain B.",
+          "Alas A = 60 cm, Tinggi A = 40 cm, Alas B = 80 cm, Tinggi B = 30 cm. Alas adalah garis biru di bawah. Tinggi adalah garis oranye putus-putus."
+        ],
+        "penjelasan_benar": "Tepat! Desain A: alas 60 cm, tinggi 40 cm. Desain B: alas 80 cm, tinggi 30 cm."
+      },
+      {
+        "no": "1b",
+        "tahap": 1,
+        "skor": 0.5,
+        "tipe": "pilihan",
+        "judul": "Ditanyakan",
+        "instruksi": "Supaya bisa memilih, apa yang harus dibandingkan?",
+        "opsi": [
+          { "id": "a", "teks": "Keliling kedua bendera" },
+          { "id": "b", "teks": "Luas kedua bendera" },
+          { "id": "c", "teks": "Panjang alasnya saja" },
+          { "id": "d", "teks": "Tingginya saja" }
+        ],
+        "kunci": "b",
+        "umpan_balik_opsi": {
+          "a": "Keliling adalah panjang tepi bendera. Cerita membahas banyaknya kain untuk menutup bendera.",
+          "c": "Alas saja belum cukup. Banyaknya kain bergantung pada alas dan tinggi.",
+          "d": "Tinggi saja belum cukup. Banyaknya kain bergantung pada alas dan tinggi."
+        },
+        "petunjuk": [
+          "Kain menutupi seluruh permukaan bendera.",
+          "Ukuran seluruh permukaan bangun datar disebut luas.",
+          "Yang dibandingkan adalah luas kedua bendera, karena kain harus menutup seluruh permukaan bendera."
+        ],
+        "penjelasan_benar": "Tepat! Kita perlu membandingkan luas kedua bendera."
+      },
+      {
+        "no": "2a",
+        "tahap": 2,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Hitung",
+        "instruksi": "Hitung luas Desain A.",
+        "pilihan_satuan": ["cm", "cm²", "m²"],
+        "kunci": { "nilai": 1200, "satuan": "cm²" },
+        "konteks_diagnosis": { "alas": 60, "tinggi": 40 },
+        "petunjuk": [
+          "Luas segitiga memakai alas dan tinggi. Lihat garis biru dan oranye pada Desain A.",
+          "Rumusnya L = ½ × alas × tinggi.",
+          "L = ½ × 60 × 40 = ½ × 2.400 = 1.200 cm²."
+        ],
+        "penjelasan_benar": "Tepat! Luas Desain A = ½ × 60 × 40 = 1.200 cm²."
+      },
+      {
+        "no": "2b",
+        "tahap": 2,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Hitung",
+        "instruksi": "Hitung luas Desain B.",
+        "pilihan_satuan": ["cm", "cm²", "m²"],
+        "kunci": { "nilai": 1200, "satuan": "cm²" },
+        "konteks_diagnosis": { "alas": 80, "tinggi": 30 },
+        "petunjuk": [
+          "Caranya sama dengan Desain A. Hanya angkanya yang berbeda.",
+          "L = ½ × alas × tinggi, dengan alas 80 cm dan tinggi 30 cm.",
+          "L = ½ × 80 × 30 = ½ × 2.400 = 1.200 cm²."
+        ],
+        "penjelasan_benar": "Tepat! Luas Desain B = ½ × 80 × 30 = 1.200 cm²."
+      },
+      {
+        "no": "3",
+        "tahap": 3,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Bandingkan",
+        "instruksi": "Bandingkan luas kedua desain.",
+        "opsi": [
+          { "id": "a", "teks": "Luas A lebih besar" },
+          { "id": "b", "teks": "Luas B lebih besar" },
+          { "id": "c", "teks": "Luas A sama dengan luas B" }
+        ],
+        "kunci": "c",
+        "umpan_balik_opsi": {
+          "a": "Lihat lagi hasil hitunganmu: luas A = 1.200 cm² dan luas B = 1.200 cm².",
+          "b": "Alas B memang lebih panjang, tetapi lihat lagi hasil luasnya: A = 1.200 cm², B = 1.200 cm²."
+        },
+        "petunjuk": [
+          "Lihat lagi hasil dari dua langkah sebelumnya.",
+          "Luas A = 1.200 cm². Luas B = 1.200 cm².",
+          "Karena 1.200 = 1.200, luas A sama dengan luas B."
+        ],
+        "penjelasan_benar": "Tepat! Luas A = luas B = 1.200 cm²."
+      },
+      {
+        "no": "4",
+        "tahap": 4,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Putuskan",
+        "instruksi": "Desain mana yang sebaiknya dipilih?",
+        "opsi": [
+          { "id": "a", "teks": "Desain A saja" },
+          { "id": "b", "teks": "Desain B saja" },
+          { "id": "c", "teks": "Keduanya bisa dipilih" }
+        ],
+        "kunci": "c",
+        "umpan_balik_opsi": {
+          "a": "Luas A dan B sama. Apakah A memang lebih baik dari B?",
+          "b": "Luas A dan B sama. Apakah B memang lebih baik dari A?"
+        },
+        "petunjuk": [
+          "Kain cukup untuk bendera dengan luas paling besar.",
+          "Kedua desain punya luas yang sama, yaitu 1.200 cm².",
+          "Karena luasnya sama, kedua desain sama-sama bisa dipilih."
+        ],
+        "penjelasan_benar": "Tepat! Kedua desain bisa dipilih karena luasnya sama."
+      },
+      {
+        "no": "5",
+        "tahap": 5,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Beri alasan",
+        "instruksi": "Pilih alasan yang paling tepat.",
+        "opsi": [
+          { "id": "a", "teks": "Karena alas Desain B lebih panjang" },
+          { "id": "b", "teks": "Karena tinggi Desain A lebih tinggi" },
+          { "id": "c", "teks": "Karena 60 × 40 = 80 × 30 = 2.400, jadi luas keduanya sama" },
+          { "id": "d", "teks": "Karena keduanya berbentuk segitiga" }
+        ],
+        "kunci": "c",
+        "umpan_balik_opsi": {
+          "a": "Alas yang lebih panjang belum tentu luasnya lebih besar. Tinggi B lebih pendek.",
+          "b": "Tinggi yang lebih tinggi belum tentu luasnya lebih besar. Alas A lebih pendek.",
+          "d": "Semua segitiga belum tentu luasnya sama. Alasan harus memakai hasil hitungan."
+        },
+        "petunjuk": [
+          "Alasan matematis memakai hasil hitungan, bukan hanya bentuknya.",
+          "Bandingkan hasil kali alas dan tinggi kedua desain.",
+          "60 × 40 = 2.400 dan 80 × 30 = 2.400. Hasil kalinya sama, jadi luasnya juga sama."
+        ],
+        "penjelasan_benar": "Tepat! Ukurannya berbeda, tetapi hasil kali alas dan tinggi sama (2.400), jadi luasnya sama."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "judul": "Kanopi Sekolah",
+    "indikator": "Formulating Situations Mathematically",
+    "indikator_singkat": "Mengubah cerita menjadi model matematika",
+    "lencana": "Perumus",
+    "cerita": [
+      "Sekolah akan memasang kain penutup pada kanopi berbentuk segitiga.",
+      "Satu kanopi memiliki alas 3 m dan tinggi 2 m.",
+      "Ada 4 kanopi yang ukurannya sama.",
+      "Harga kain Rp25.000 setiap 1 m².",
+      "Berapa luas seluruh kain dan berapa biayanya?"
+    ],
+    "gambar": {
+      "tipe": "segitiga",
+      "judul": "1 kanopi (ada 4 kanopi)",
+      "alas": 3,
+      "tinggi": 2,
+      "satuan": "m",
+      "puncak": 0.5
+    },
+    "langkah": [
+      {
+        "no": "1",
+        "tahap": 1,
+        "skor": 1,
+        "tipe": "pilah",
+        "judul": "Diketahui",
+        "instruksi": "Tempatkan setiap informasi ke kotak yang tepat.",
+        "gambar": {
+          "tipe": "segitiga",
+          "judul": "1 kanopi",
+          "alas": 3,
+          "tinggi": 2,
+          "satuan": "m",
+          "puncak": 0.5,
+          "tanpa_angka": true
+        },
+        "item": [
+          { "id": "u1", "teks": "3 m" },
+          { "id": "u2", "teks": "2 m" },
+          { "id": "u3", "teks": "4" },
+          { "id": "u4", "teks": "Rp25.000" }
+        ],
+        "kotak": [
+          { "id": "alas", "label": "Alas satu kanopi" },
+          { "id": "tinggi", "label": "Tinggi satu kanopi" },
+          { "id": "jumlah", "label": "Banyak kanopi" },
+          { "id": "harga", "label": "Harga kain per m²" }
+        ],
+        "kunci": { "u1": "alas", "u2": "tinggi", "u3": "jumlah", "u4": "harga" },
+        "umpan_balik_item": {
+          "u3": "Angka 4 tidak punya satuan. Angka ini menyatakan banyaknya benda.",
+          "u4": "Rupiah adalah satuan uang."
+        },
+        "petunjuk": [
+          "Baca lagi cerita kalimat demi kalimat. Setiap kalimat berisi satu informasi.",
+          "Ukuran dengan satuan m adalah alas dan tinggi. Angka dengan Rp adalah harga.",
+          "Alas = 3 m, tinggi = 2 m, banyak kanopi = 4, harga kain per m² = Rp25.000."
+        ],
+        "penjelasan_benar": "Tepat! Alas 3 m, tinggi 2 m, ada 4 kanopi, harga kain Rp25.000 per m²."
+      },
+      {
+        "no": "2",
+        "tahap": 2,
+        "skor": 1,
+        "tipe": "pilihan",
+        "pilih_banyak": true,
+        "judul": "Ditanyakan",
+        "instruksi": "Apa yang ditanyakan? Pilih 2 jawaban.",
+        "opsi": [
+          { "id": "a", "teks": "Luas kain untuk 4 kanopi" },
+          { "id": "b", "teks": "Total biaya kain" },
+          { "id": "c", "teks": "Keliling kanopi" },
+          { "id": "d", "teks": "Banyak kanopi" }
+        ],
+        "kunci": ["a", "b"],
+        "umpan_balik_opsi": {
+          "c": "Keliling tidak ditanyakan. Lihat kalimat terakhir cerita.",
+          "d": "Banyak kanopi sudah diketahui, yaitu 4. Yang ditanya adalah hal yang belum diketahui."
+        },
+        "petunjuk": [
+          "Pertanyaan biasanya ada di kalimat terakhir cerita.",
+          "Kalimat terakhir: “Berapa luas seluruh kain dan berapa biayanya?”",
+          "Yang ditanyakan: luas kain untuk 4 kanopi dan total biaya kain."
+        ],
+        "penjelasan_benar": "Tepat! Yang ditanyakan adalah luas kain untuk 4 kanopi dan total biayanya."
+      },
+      {
+        "no": "3",
+        "tahap": 3,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Model",
+        "instruksi": "Pilih rumus untuk luas satu kanopi.",
+        "opsi": [
+          { "id": "a", "teks": "L = alas × tinggi" },
+          { "id": "b", "teks": "L = ½ × alas × tinggi" },
+          { "id": "c", "teks": "L = alas + tinggi + sisi" },
+          { "id": "d", "teks": "L = ½ × (alas + tinggi)" }
+        ],
+        "kunci": "b",
+        "umpan_balik_opsi": {
+          "a": "Alas × tinggi adalah luas persegi panjang. Segitiga hanya setengahnya.",
+          "c": "Menjumlahkan sisi menghasilkan keliling, bukan luas.",
+          "d": "Pada rumus luas, alas dan tinggi dikalikan, bukan dijumlahkan."
+        },
+        "petunjuk": [
+          "Kanopi berbentuk segitiga. Rumus apa yang dipakai untuk luas segitiga?",
+          "Segitiga adalah setengah dari persegi panjang.",
+          "Luas segitiga: L = ½ × alas × tinggi."
+        ],
+        "penjelasan_benar": "Tepat! Model luas satu kanopi: L = ½ × alas × tinggi."
+      },
+      {
+        "no": "4",
+        "tahap": 4,
+        "skor": 1,
+        "tipe": "rumus",
+        "judul": "Hitung",
+        "instruksi": "Isi kotak untuk menghitung luas satu kanopi.",
+        "template": "L = ½ × [] × [] = [] m²",
+        "kunci": { "isian": [3, 2, 3], "bebas_tukar": [[0, 1]] },
+        "pola_salah_isian": [
+          {
+            "isian_ke": 3,
+            "nilai": 6,
+            "kode": "LUPA_SETENGAH",
+            "pesan": "Kotak hasil: 3 × 2 = 6, lalu jangan lupa dikali ½."
+          }
+        ],
+        "petunjuk": [
+          "Masukkan alas dan tinggi satu kanopi ke dua kotak pertama.",
+          "L = ½ × 3 × 2. Hitung 3 × 2 dulu, lalu bagi 2.",
+          "L = ½ × 3 × 2 = ½ × 6 = 3 m²."
+        ],
+        "penjelasan_benar": "Tepat! Luas satu kanopi = ½ × 3 × 2 = 3 m²."
+      },
+      {
+        "no": "5",
+        "tahap": 5,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Hitung",
+        "instruksi": "Hitung luas kain untuk 4 kanopi.",
+        "pilihan_satuan": ["m", "m²"],
+        "kunci": { "nilai": 12, "satuan": "m²" },
+        "pola_salah": [
+          { "nilai": 3, "kode": "LUPA_JUMLAH_BENDA", "pesan": "Itu luas 1 kanopi. Ada berapa kanopi?" },
+          { "nilai": 7, "kode": "JUMLAH_BUKAN_KALI", "pesan": "Ada 4 kanopi yang masing-masing 3 m². Kalikan, bukan jumlahkan." },
+          { "nilai": 24, "kode": "LUPA_SETENGAH", "pesan": "Kamu memakai 6 m² untuk satu kanopi. Luas satu kanopi adalah 3 m²." }
+        ],
+        "petunjuk": [
+          "Kamu sudah tahu luas satu kanopi. Ada berapa kanopi?",
+          "Luas seluruh kain = banyak kanopi × luas satu kanopi.",
+          "Luas seluruh kain = 4 × 3 = 12 m²."
+        ],
+        "penjelasan_benar": "Tepat! Luas seluruh kain = 4 × 3 = 12 m²."
+      },
+      {
+        "no": "6",
+        "tahap": 6,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Simpulkan",
+        "instruksi": "Hitung total biaya kain.",
+        "awalan": "Rp",
+        "kunci": { "nilai": 300000, "satuan": "Rp" },
+        "pola_salah": [
+          { "nilai": 75000, "kode": "LUPA_JUMLAH_BENDA", "pesan": "Itu biaya untuk 1 kanopi saja. Pakai luas kain untuk 4 kanopi." },
+          { "nilai": 600000, "kode": "LUPA_SETENGAH", "pesan": "Biayamu 2 kali lebih besar. Luas seluruh kain adalah 12 m², bukan 24 m²." },
+          { "nilai": 25012, "kode": "JUMLAH_BUKAN_KALI", "pesan": "Luas dan harga per m² dikalikan, bukan dijumlahkan." }
+        ],
+        "petunjuk": [
+          "Kamu sudah tahu luas seluruh kain. Setiap 1 m² harganya berapa?",
+          "Biaya = luas seluruh kain × harga per m².",
+          "Biaya = 12 × Rp25.000 = Rp300.000."
+        ],
+        "penjelasan_benar": "Tepat! Biaya = 12 × Rp25.000 = Rp300.000. Jadi, perlu 12 m² kain dengan biaya Rp300.000."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "judul": "Taman Sekolah",
+    "indikator": "Employing Mathematical Concepts, Facts, and Procedures",
+    "indikator_singkat": "Memakai konsep dan prosedur",
+    "lencana": "Penghitung",
+    "cerita": [
+      "Taman sekolah berbentuk segitiga dengan alas 12 m dan tinggi 7 m.",
+      "⅓ bagian taman ditanami bunga.",
+      "Sisanya ditanami rumput.",
+      "Berapa luas bagian bunga dan bagian rumput?"
+    ],
+    "gambar": {
+      "tipe": "segitiga",
+      "judul": "Taman sekolah",
+      "alas": 12,
+      "tinggi": 7,
+      "satuan": "m",
+      "puncak": 0.4
+    },
+    "langkah": [
+      {
+        "no": "1",
+        "tahap": 1,
+        "skor": 1,
+        "tipe": "pilah",
+        "judul": "Diketahui",
+        "instruksi": "Tempatkan setiap informasi ke kotak yang tepat.",
+        "gambar": {
+          "tipe": "segitiga",
+          "judul": "Taman sekolah",
+          "alas": 12,
+          "tinggi": 7,
+          "satuan": "m",
+          "puncak": 0.4,
+          "tanpa_angka": true
+        },
+        "item": [
+          { "id": "u1", "teks": "12 m" },
+          { "id": "u2", "teks": "7 m" },
+          { "id": "u3", "teks": "⅓" }
+        ],
+        "kotak": [
+          { "id": "alas", "label": "Alas taman" },
+          { "id": "tinggi", "label": "Tinggi taman" },
+          { "id": "bunga", "label": "Bagian bunga" }
+        ],
+        "kunci": { "u1": "alas", "u2": "tinggi", "u3": "bunga" },
+        "petunjuk": [
+          "Kalimat pertama berisi ukuran taman. Kalimat kedua berisi bagian bunga.",
+          "Alas taman 12 m. Sekarang cari tingginya.",
+          "Alas = 12 m, tinggi = 7 m, bagian bunga = ⅓."
+        ],
+        "penjelasan_benar": "Tepat! Alas 12 m, tinggi 7 m, dan bunga menempati ⅓ bagian taman."
+      },
+      {
+        "no": "2a",
+        "tahap": 2,
+        "skor": 1,
+        "tipe": "rumus",
+        "judul": "Rumus",
+        "instruksi": "Masukkan alas dan tinggi taman ke rumus luas.",
+        "template": "L = ½ × [] × []",
+        "kunci": { "isian": [12, 7], "bebas_tukar": [[0, 1]] },
+        "petunjuk": [
+          "Rumus luas segitiga memakai alas dan tinggi.",
+          "Alas taman 12 m dan tinggi taman 7 m.",
+          "L = ½ × 12 × 7."
+        ],
+        "penjelasan_benar": "Tepat! L = ½ × 12 × 7."
+      },
+      {
+        "no": "2b",
+        "tahap": 2,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Hitung",
+        "instruksi": "Hitung luas seluruh taman.",
+        "pilihan_satuan": ["m", "m²"],
+        "kunci": { "nilai": 42, "satuan": "m²" },
+        "konteks_diagnosis": { "alas": 12, "tinggi": 7 },
+        "petunjuk": [
+          "Hitung ½ × 12 × 7.",
+          "12 × 7 = 84. Lalu kalikan dengan ½, artinya dibagi 2.",
+          "L = ½ × 12 × 7 = ½ × 84 = 42 m²."
+        ],
+        "penjelasan_benar": "Tepat! Luas seluruh taman = ½ × 12 × 7 = 42 m²."
+      },
+      {
+        "no": "3a",
+        "tahap": 3,
+        "skor": 1,
+        "tipe": "rumus",
+        "judul": "Rumus",
+        "instruksi": "Isi kotak untuk menghitung luas bagian bunga. Pecahan boleh ditulis 1/3.",
+        "template": "Luas bunga = [] × []",
+        "kunci": { "isian": ["1/3", 42], "bebas_tukar": [[0, 1]] },
+        "pola_salah_isian": [
+          {
+            "isian_ke": 1,
+            "nilai": "2/3",
+            "kode": "TERTUKAR_BAGIAN",
+            "pesan": "⅔ adalah bagian rumput. Bunga hanya ⅓ bagian."
+          }
+        ],
+        "petunjuk": [
+          "Bunga menempati ⅓ dari seluruh taman.",
+          "“⅓ dari 42” ditulis ⅓ × 42.",
+          "Luas bunga = ⅓ × 42 (tulis 1/3 di kotak pertama dan 42 di kotak kedua)."
+        ],
+        "penjelasan_benar": "Tepat! Luas bunga = ⅓ × 42."
+      },
+      {
+        "no": "3b",
+        "tahap": 3,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Hitung",
+        "instruksi": "Hitung luas bagian bunga.",
+        "pilihan_satuan": ["m", "m²"],
+        "kunci": { "nilai": 14, "satuan": "m²" },
+        "pola_salah": [
+          { "nilai": 28, "kode": "TERTUKAR_BAGIAN", "pesan": "Itu luas bagian rumput. Bunga hanya ⅓ bagian." },
+          { "nilai": 126, "kode": "SALAH_HITUNG", "pesan": "Kamu mengalikan 42 dengan 3. “⅓ dari 42” artinya 42 dibagi 3." },
+          { "nilai": 39, "kode": "SALAH_HITUNG", "pesan": "Kamu mengurangi 42 dengan 3. “⅓ dari 42” artinya 42 dibagi 3." },
+          { "nilai": 84, "kode": "LUPA_SETENGAH", "pesan": "Luas seluruh taman adalah 42 m², bukan 84 m²." }
+        ],
+        "petunjuk": [
+          "Hitung ⅓ × 42.",
+          "Mengalikan dengan ⅓ sama dengan membagi 3.",
+          "Luas bunga = ⅓ × 42 = 42 : 3 = 14 m²."
+        ],
+        "penjelasan_benar": "Tepat! Luas bunga = ⅓ × 42 = 14 m²."
+      },
+      {
+        "no": "4",
+        "tahap": 4,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Simpulkan",
+        "instruksi": "Hitung luas bagian rumput.",
+        "gambar": {
+          "tipe": "segitiga",
+          "judul": "Taman sekolah",
+          "alas": 12,
+          "tinggi": 7,
+          "satuan": "m",
+          "puncak": 0.4,
+          "arsir": { "bagian": 0.3333333333, "label": "bunga 14 m²", "label_sisa": "rumput ?" }
+        },
+        "pilihan_satuan": ["m", "m²"],
+        "kunci": { "nilai": 28, "satuan": "m²" },
+        "pola_salah": [
+          { "nilai": 14, "kode": "TERTUKAR_BAGIAN", "pesan": "Itu luas bunga. Rumput adalah sisanya." },
+          { "nilai": 42, "kode": "TERTUKAR_BAGIAN", "pesan": "Itu luas seluruh taman. Kurangi dengan luas bunga." },
+          { "nilai": 56, "kode": "JUMLAH_BUKAN_KALI", "pesan": "Rumput adalah sisa taman. Kurangi, jangan dijumlahkan." }
+        ],
+        "petunjuk": [
+          "Rumput menempati sisa taman yang tidak ditanami bunga.",
+          "Luas rumput = luas seluruh taman − luas bunga.",
+          "Luas rumput = 42 − 14 = 28 m². (Cara lain: ⅔ × 42 = 28 m².)"
+        ],
+        "penjelasan_benar": "Tepat! Luas rumput = 42 − 14 = 28 m². Jadi, bunga 14 m² dan rumput 28 m²."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "judul": "Papan Informasi",
+    "indikator": "Interpreting, Applying, and Evaluating Mathematical Outcomes",
+    "indikator_singkat": "Menafsirkan dan menilai hasil",
+    "lencana": "Pemeriksa",
+    "cerita": [
+      "Papan informasi berbentuk segitiga dengan alas 2,4 m dan tinggi 1,5 m.",
+      "Dika menghitung luasnya: 2,4 × 1,5 = 3,6 m².",
+      "Dika berkata kain 3,6 m² sudah pas untuk menutup satu sisi papan.",
+      "Apakah kamu setuju dengan perhitungan Dika?"
+    ],
+    "gambar": {
+      "tipe": "segitiga",
+      "judul": "Papan informasi",
+      "alas": 2.4,
+      "tinggi": 1.5,
+      "satuan": "m",
+      "puncak": 0.5
+    },
+    "langkah": [
+      {
+        "no": "1",
+        "tahap": 1,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Diketahui",
+        "instruksi": "Apa yang dilakukan Dika?",
+        "opsi": [
+          { "id": "a", "teks": "Mengalikan alas dan tinggi: 2,4 × 1,5" },
+          { "id": "b", "teks": "Menjumlahkan alas dan tinggi" },
+          { "id": "c", "teks": "Menghitung ½ × alas × tinggi" },
+          { "id": "d", "teks": "Menghitung keliling papan" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "Lihat kalimat ke-2: Dika memakai tanda ×, bukan +.",
+          "c": "Lihat kalimat ke-2: Dika tidak memakai ½.",
+          "d": "Keliling memakai ketiga sisi. Dika hanya memakai alas dan tinggi."
+        },
+        "petunjuk": [
+          "Baca lagi kalimat ke-2 pada cerita.",
+          "Dika menulis 2,4 × 1,5. Angka 2,4 adalah alas dan 1,5 adalah tinggi.",
+          "Dika mengalikan alas dan tinggi: 2,4 × 1,5 = 3,6."
+        ],
+        "penjelasan_benar": "Tepat! Dika mengalikan alas dan tinggi: 2,4 × 1,5 = 3,6 m²."
+      },
+      {
+        "no": "2",
+        "tahap": 2,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Rumus",
+        "instruksi": "Rumus luas segitiga yang benar adalah …",
+        "opsi": [
+          { "id": "a", "teks": "L = alas × tinggi" },
+          { "id": "b", "teks": "L = ½ × alas × tinggi" },
+          { "id": "c", "teks": "L = alas + tinggi" },
+          { "id": "d", "teks": "L = 2 × alas × tinggi" }
+        ],
+        "kunci": "b",
+        "umpan_balik_opsi": {
+          "a": "Itu rumus yang dipakai Dika. Rumus ini untuk persegi panjang.",
+          "c": "Pada rumus luas, alas dan tinggi dikalikan.",
+          "d": "Segitiga adalah setengah persegi panjang, bukan dua kalinya."
+        },
+        "petunjuk": [
+          "Segitiga adalah setengah dari persegi panjang.",
+          "Luas persegi panjang = alas × tinggi. Segitiga hanya setengahnya.",
+          "L = ½ × alas × tinggi. Dika lupa memakai ½."
+        ],
+        "penjelasan_benar": "Tepat! L = ½ × alas × tinggi. Dika tidak memakai ½."
+      },
+      {
+        "no": "3",
+        "tahap": 3,
+        "skor": 1,
+        "tipe": "angka",
+        "judul": "Hitung",
+        "instruksi": "Hitung luas papan yang benar.",
+        "pilihan_satuan": ["m", "m²"],
+        "kunci": { "nilai": 1.8, "satuan": "m²" },
+        "konteks_diagnosis": { "alas": 2.4, "tinggi": 1.5 },
+        "pola_salah": [
+          { "nilai": 3.6, "kode": "LUPA_SETENGAH", "pesan": "Itu sama dengan hasil Dika. Jangan lupa dikali ½." }
+        ],
+        "petunjuk": [
+          "Pakai rumus L = ½ × alas × tinggi.",
+          "2,4 × 1,5 = 3,6. Lalu kalikan dengan ½, artinya dibagi 2.",
+          "L = ½ × 2,4 × 1,5 = ½ × 3,6 = 1,8 m²."
+        ],
+        "penjelasan_benar": "Tepat! L = ½ × 2,4 × 1,5 = 1,8 m²."
+      },
+      {
+        "no": "4",
+        "tahap": 4,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Tafsirkan",
+        "instruksi": "Hasil Dika (3,6 m²) dibandingkan luas yang benar (1,8 m²) adalah …",
+        "gambar": {
+          "tipe": "persegi_panjang_dibagi",
+          "alas": 2.4,
+          "tinggi": 1.5,
+          "satuan": "m"
+        },
+        "opsi": [
+          { "id": "a", "teks": "Sama besar" },
+          { "id": "b", "teks": "2 kali luas sebenarnya, karena ½ tidak dipakai" },
+          { "id": "c", "teks": "Setengah dari luas sebenarnya" },
+          { "id": "d", "teks": "3 kali luas sebenarnya" }
+        ],
+        "kunci": "b",
+        "umpan_balik_opsi": {
+          "a": "3,6 dan 1,8 tidak sama. Coba bandingkan: 1,8 + 1,8 = ?",
+          "c": "3,6 lebih besar dari 1,8, bukan lebih kecil.",
+          "d": "Coba hitung: 1,8 × 3 = 5,4, bukan 3,6."
+        },
+        "petunjuk": [
+          "Lihat gambar: persegi panjang terbagi menjadi 2 segitiga yang sama.",
+          "Hitung 1,8 + 1,8 atau 1,8 × 2.",
+          "1,8 × 2 = 3,6. Jadi hasil Dika 2 kali luas sebenarnya, karena Dika menghitung luas persegi panjang."
+        ],
+        "penjelasan_benar": "Tepat! 3,6 = 2 × 1,8. Dika menghitung luas persegi panjang, yaitu 2 kali luas segitiga."
+      },
+      {
+        "no": "5",
+        "tahap": 5,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Nilai",
+        "instruksi": "Apakah kamu setuju dengan perhitungan Dika?",
+        "opsi": [
+          { "id": "a", "teks": "Setuju, karena 2,4 × 1,5 memang 3,6" },
+          { "id": "b", "teks": "Tidak setuju, karena Dika lupa mengalikan dengan ½" },
+          { "id": "c", "teks": "Tidak setuju, karena 2,4 × 1,5 bukan 3,6" }
+        ],
+        "kunci": "b",
+        "umpan_balik_opsi": {
+          "a": "Perkaliannya benar, tetapi rumusnya keliru. Luas segitiga bukan alas × tinggi.",
+          "c": "Coba hitung: 2,4 × 1,5 memang 3,6. Kesalahannya ada pada rumus."
+        },
+        "petunjuk": [
+          "Pisahkan dua hal: apakah perkaliannya benar, dan apakah rumusnya benar?",
+          "2,4 × 1,5 = 3,6 memang benar. Tetapi rumus luas segitiga memakai ½.",
+          "Tidak setuju. Perkalian Dika benar, tetapi rumusnya salah karena tidak memakai ½."
+        ],
+        "penjelasan_benar": "Tepat! Perkalian Dika benar, tetapi rumusnya salah karena tidak memakai ½."
+      },
+      {
+        "no": "6",
+        "tahap": 6,
+        "skor": 1,
+        "tipe": "pilihan",
+        "judul": "Simpulkan",
+        "instruksi": "Kesimpulan yang tepat tentang kebutuhan kain adalah …",
+        "opsi": [
+          { "id": "a", "teks": "Kain 3,6 m² kurang untuk menutup satu sisi papan" },
+          { "id": "b", "teks": "Kain minimal 1,8 m² sudah cukup, jadi 3,6 m² berlebih" },
+          { "id": "c", "teks": "Kain yang dibutuhkan tepat 3,6 m²" }
+        ],
+        "kunci": "b",
+        "umpan_balik_opsi": {
+          "a": "3,6 m² lebih besar dari 1,8 m², jadi kainnya tidak kurang.",
+          "c": "Luas satu sisi papan hanya 1,8 m². Kain 3,6 m² lebih dari yang dibutuhkan."
+        },
+        "petunjuk": [
+          "Luas satu sisi papan adalah 1,8 m².",
+          "Bandingkan 3,6 m² dengan 1,8 m². Mana yang lebih besar?",
+          "Kain minimal 1,8 m² sudah cukup untuk satu sisi papan (tanpa menghitung lipatan). Kain 3,6 m² berlebih."
+        ],
+        "penjelasan_benar": "Tepat! Kain minimal 1,8 m² sudah cukup untuk satu sisi papan (tanpa lipatan). Kain 3,6 m² berlebih 2 kali lipat."
+      }
+    ]
+  }
+]

@@ -1,0 +1,103 @@
+{
+  "pilah": [
+    {
+      "id": "p1",
+      "judul": "Hiasan Dinding",
+      "cerita": [
+        "Sebuah hiasan dinding berbentuk segitiga memiliki alas 40 cm dan tinggi 30 cm.",
+        "Hiasan itu dibuat oleh 5 siswa.",
+        "Berapa luas hiasan dinding itu?"
+      ],
+      "tipe": "pilah",
+      "instruksi": "Tempatkan setiap informasi ke kotak yang tepat.",
+      "item": [
+        { "id": "i1", "teks": "alas 40 cm" },
+        { "id": "i2", "teks": "tinggi 30 cm" },
+        { "id": "i3", "teks": "5 siswa" },
+        { "id": "i4", "teks": "luas hiasan" }
+      ],
+      "kotak": [
+        { "id": "diketahui", "label": "Diketahui" },
+        { "id": "ditanyakan", "label": "Ditanyakan" },
+        { "id": "tidak", "label": "Tidak dipakai" }
+      ],
+      "kunci": { "i1": "diketahui", "i2": "diketahui", "i3": "tidak", "i4": "ditanyakan" },
+      "umpan_balik_item": {
+        "i3": "Banyak siswa yang membuat tidak mengubah luas hiasan.",
+        "i4": "Luas hiasan belum diketahui. Itulah yang ditanyakan."
+      },
+      "penjelasan_benar": "Tepat! Untuk luas cukup alas dan tinggi. Banyak siswa tidak dipakai."
+    },
+    {
+      "id": "p2",
+      "judul": "Rumah Burung",
+      "cerita": [
+        "Atap rumah burung berbentuk segitiga dengan alas 20 cm dan tinggi 15 cm.",
+        "Pak Budi membuat 3 rumah burung dalam 2 hari.",
+        "Berapa luas kayu untuk atap semua rumah burung?"
+      ],
+      "tipe": "pilah",
+      "instruksi": "Tempatkan setiap informasi ke kotak yang tepat.",
+      "item": [
+        { "id": "i1", "teks": "alas 20 cm" },
+        { "id": "i2", "teks": "tinggi 15 cm" },
+        { "id": "i3", "teks": "3 rumah burung" },
+        { "id": "i4", "teks": "2 hari" },
+        { "id": "i5", "teks": "luas kayu semua atap" }
+      ],
+      "kotak": [
+        { "id": "diketahui", "label": "Diketahui" },
+        { "id": "ditanyakan", "label": "Ditanyakan" },
+        { "id": "tidak", "label": "Tidak dipakai" }
+      ],
+      "kunci": {
+        "i1": "diketahui",
+        "i2": "diketahui",
+        "i3": "diketahui",
+        "i4": "tidak",
+        "i5": "ditanyakan"
+      },
+      "umpan_balik_item": {
+        "i3": "Yang ditanya atap semua rumah burung, jadi banyak rumah burung dipakai.",
+        "i4": "Lama pembuatan tidak mengubah luas kayu."
+      },
+      "penjelasan_benar": "Tepat! Alas, tinggi, dan banyak rumah burung dipakai. Lama pembuatan tidak dipakai."
+    },
+    {
+      "id": "p3",
+      "judul": "Spanduk Kelas",
+      "cerita": [
+        "Spanduk segitiga memiliki alas 3 m dan tinggi 1 m.",
+        "Biaya cetak Rp20.000 setiap 1 m².",
+        "Spanduk dipasang 2 m di atas tanah.",
+        "Berapa biaya mencetak spanduk itu?"
+      ],
+      "tipe": "pilah",
+      "instruksi": "Tempatkan setiap informasi ke kotak yang tepat.",
+      "item": [
+        { "id": "i1", "teks": "alas 3 m" },
+        { "id": "i2", "teks": "tinggi 1 m" },
+        { "id": "i3", "teks": "Rp20.000 per m²" },
+        { "id": "i4", "teks": "2 m di atas tanah" },
+        { "id": "i5", "teks": "biaya mencetak" }
+      ],
+      "kotak": [
+        { "id": "diketahui", "label": "Diketahui" },
+        { "id": "ditanyakan", "label": "Ditanyakan" },
+        { "id": "tidak", "label": "Tidak dipakai" }
+      ],
+      "kunci": {
+        "i1": "diketahui",
+        "i2": "diketahui",
+        "i3": "diketahui",
+        "i4": "tidak",
+        "i5": "ditanyakan"
+      },
+      "umpan_balik_item": {
+        "i4": "Ketinggian pemasangan tidak mengubah luas atau biaya cetak. Angka ini pengecoh.",
+        "i1": "Hati-hati: “2 m di atas tanah” bukan tinggi segitiga."
+      },
+      "penjelasan_benar": "Tepat! “2 m di atas tanah” adalah pengecoh. Tinggi segitiga adalah 1 m."
+    }
+  ]
+}

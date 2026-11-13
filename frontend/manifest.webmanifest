@@ -1,0 +1,10 @@
+{
+  "name": "SegiPintar — Belajar Segitiga",
+  "short_name": "SegiPintar",
+  "lang": "id",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf7",
+  "theme_color": "#2f5d8a",
+  "icons": [{ "src": "/ikon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

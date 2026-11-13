@@ -1,0 +1,60 @@
+/* Token warna & ukuran SegiPintar.
+   ATURAN: jangan menambah warna baru tanpa memperbarui docs/02-desain.md (EL03, DS03).
+   alas = biru, tinggi = oranye putus-putus, sisi lain = abu-abu — jangan dipertukarkan. */
+
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --text-muted: #5b616b;
+  --primary: #2f5d8a;
+  --primary-teks: #ffffff;
+  --alas: #1f6feb;
+  --tinggi: #d9730d;
+  --sisi: #8a9099;
+  --benar: #2e7d4f;
+  --salah: #b3261e;
+  --isi: #eef3f8;
+  --garis: #dadde2;
+
+  --radius: 12px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ukuran-dasar: 18px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16181d;
+    --surface: #20232a;
+    --text: #e8e8e3;
+    --text-muted: #a3a8b0;
+    --primary: #7fa9d6;
+    --primary-teks: #10141a;
+    --alas: #6ca4ff;
+    --tinggi: #f2a85b;
+    --sisi: #6b717a;
+    --benar: #6cc495;
+    --salah: #f08a82;
+    --isi: #252b35;
+    --garis: #353a44;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #16181d;
+  --surface: #20232a;
+  --text: #e8e8e3;
+  --text-muted: #a3a8b0;
+  --primary: #7fa9d6;
+  --primary-teks: #10141a;
+  --alas: #6ca4ff;
+  --tinggi: #f2a85b;
+  --sisi: #6b717a;
+  --benar: #6cc495;
+  --salah: #f08a82;
+  --isi: #252b35;
+  --garis: #353a44;
+  color-scheme: dark;
+}
