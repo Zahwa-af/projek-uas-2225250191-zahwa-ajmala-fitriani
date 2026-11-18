@@ -11,6 +11,7 @@ from flask import Blueprint, current_app, jsonify
 from segitiga import bank_soal
 from segitiga.penilai import kategori_literasi
 
+from .keamanan import catat_pin_salah, pin_terkunci
 from .routes_soal import daftar_misi_dengan_status
 from .umum import GalatApi, data_json, koneksi, sekarang, teks_wajib
 
@@ -67,7 +68,10 @@ def rekap_guru():
     pin_benar = current_app.config.get("PIN_GURU")
     if not pin_benar:
         raise GalatApi("Halaman guru belum diaktifkan. Atur SEGIPINTAR_PIN_GURU di server.", 403)
+    if pin_terkunci():
+        raise GalatApi("Terlalu banyak PIN salah. Tunggu 15 menit, lalu coba lagi.", 429)
     if not hmac.compare_digest(str(data.get("pin") or ""), pin_benar):
+        catat_pin_salah()
         raise GalatApi("PIN guru salah.", 403)
     kelas = teks_wajib(data, "kode_kelas", "Kode kelas", 20).upper()
     conn = koneksi()

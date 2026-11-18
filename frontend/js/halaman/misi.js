@@ -2,6 +2,7 @@
 
 import { api } from "../api.js";
 import { barBawah, bintangTeks, el, fmt, kotakUmpan, tombol } from "../dom.js";
+import { elPesanChat } from "../format-pesan.js";
 import { buatKomponen } from "../langkah.js";
 import { gambar } from "../segitiga-svg.js";
 import { ambilSesi, simpanSesi } from "../state.js";
@@ -70,6 +71,8 @@ export async function halamanMisi(app, idTeks) {
     sibuk: false,
     hasil: null,
     kunciLayar: null,
+    chat: [],
+chatSibuk: false,
   };
   st.langkah = misi.langkah.map((lk) => ({
     komponen: buatKomponen(lk, { kirim: () => periksa() }),
@@ -226,6 +229,7 @@ export async function halamanMisi(app, idTeks) {
           s.umpan ? kotakUmpan(s.jenisUmpan, s.umpan) : null,
           ingatLagi,
           petunjuk,
+          panelPembimbing(lk),
         ),
       ),
       barBawah(
@@ -238,6 +242,71 @@ export async function halamanMisi(app, idTeks) {
       ),
     );
   }
+
+function panelPembimbing(lk) {
+  const riwayat = el(
+    "div",
+    { class: "chat-riwayat", "aria-live": "polite" },
+    ...st.chat.map((pesan) => elPesanChat(pesan.peran, pesan.teks)),
+    st.chatSibuk
+      ? el("p", { class: "teks-redup chat-memuat" }, "Pembimbing sedang berpikir...")
+      : null
+  );
+
+  const area = el("textarea", {
+    rows: "3",
+    maxlength: "500",
+    placeholder: "Contoh: Aku belum paham cara mengerjakan langkah ini."
+  });
+
+  const kirim = async () => {
+    const teks = area.value.trim();
+
+    if (!teks || st.chatSibuk) return;
+
+    st.chat.push({ peran: "siswa", teks });
+    st.chatSibuk = true;
+    render();
+
+    try {
+      const hasil = await api.pesanAsisten(
+        st.mainId,
+        lk.no,
+        teks
+      );
+
+      st.chat.push({
+        peran: "asisten",
+        teks: hasil.balasan
+      });
+    } catch (e) {
+      st.chat.push({
+        peran: "asisten",
+        teks: e.message || "Pembimbing belum bisa menjawab. Coba lagi."
+      });
+    } finally {
+      st.chatSibuk = false;
+      render();
+    }
+  };
+
+  return el(
+    "section",
+    { class: "kartu" },
+    el("h2", {}, "Pembimbing AI SegiPintar"),
+    el(
+      "p",
+      { class: "teks-redup" },
+      "Tanyakan bagian yang belum kamu pahami. Pembimbing akan membantumu secara bertahap."
+    ),
+    riwayat,
+    area,
+    tombol("Kirim pertanyaan", kirim, true, {
+      disabled: st.chatSibuk
+    })
+  );
+}
+
 
   async function periksa() {
     const lk = misi.langkah[st.i];

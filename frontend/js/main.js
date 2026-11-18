@@ -3,6 +3,7 @@
 import { api } from "./api.js";
 import { el, kotakUmpan } from "./dom.js";
 import { halamanBeranda } from "./halaman/beranda.js";
+import { halamanAsisten } from "./halaman/asisten.js";
 import { halamanDaftarBelajar, halamanTopik } from "./halaman/belajar.js";
 import { halamanGuru } from "./halaman/guru.js";
 import { halamanHasil } from "./halaman/hasil.js";
@@ -23,6 +24,7 @@ const RUTE = [
   [/^\/latihan\/pilah$/, halamanLatihanPilah, true],
   [/^\/misi$/, halamanDaftarMisi, true],
   [/^\/misi\/(\d+)$/, halamanMisi, true],
+  [/^\/asisten$/, halamanAsisten, true],
   [/^\/hasil$/, halamanHasil, true],
   [/^\/guru$/, halamanGuru, false],
 ];

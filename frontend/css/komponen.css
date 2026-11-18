@@ -726,3 +726,145 @@ details summary {
 .bacaan {
   font-size: 17px;
 }
+
+/* ---------- chat Pembimbing AI ----------
+   Hanya memakai token warna dari tokens.css (aturan desain no. 3). */
+.chat-riwayat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0;
+  min-width: 0;
+}
+
+.chat-pesan {
+  min-width: 0;
+  max-width: 100%;
+  padding: 10px 14px 12px;
+  border-radius: var(--radius);
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-wrap: anywhere; /* kata/rumus panjang turun baris, tidak keluar layar */
+  word-break: normal;
+}
+
+.chat-siswa {
+  align-self: flex-end;
+  max-width: 88%;
+  background: var(--surface);
+  border: 1px solid var(--garis);
+}
+
+.chat-asisten {
+  align-self: stretch;
+  background: var(--isi);
+  border-left: 4px solid var(--primary);
+}
+
+.chat-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.chat-isi > :last-child {
+  margin-bottom: 0;
+}
+
+.chat-isi p {
+  margin: 0 0 10px;
+}
+
+.chat-teks-polos {
+  white-space: pre-wrap; /* pertahankan baris baru yang diketik siswa */
+}
+
+.chat-isi ul,
+.chat-isi ol {
+  margin: 0 0 10px;
+  padding-left: 22px;
+}
+
+.chat-isi li {
+  margin-bottom: 4px;
+}
+
+.chat-isi strong {
+  font-weight: 700;
+}
+
+.chat-judul {
+  font-weight: 700;
+}
+
+.chat-isi code {
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: var(--surface);
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.92em;
+}
+
+/* Rumus di chat: sedikit ditonjolkan, angka sejajar, tetap boleh turun baris di HP.
+   Sengaja bukan ".rumus" — kelas itu milik komponen isian rumus di halaman misi. */
+.chat-mat {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--garis);
+  font-variant-numeric: tabular-nums;
+  white-space: normal;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.chat-rumus {
+  text-align: center;
+}
+
+.chat-mat-blok {
+  display: inline-block;
+  max-width: 100%;
+  padding: 6px 12px;
+  font-size: 1.08em;
+  font-weight: 600;
+}
+
+/* Pangkat & indeks tanpa membuat jarak baris melompat. */
+.chat-isi sup,
+.chat-isi sub {
+  position: relative;
+  font-size: 0.72em;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.chat-isi sup {
+  top: -0.5em;
+}
+
+.chat-isi sub {
+  bottom: -0.25em;
+}
+
+.chat-memuat {
+  margin: 0;
+}
+
+.chat-riwayat + textarea {
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .chat-pesan {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+  .chat-siswa {
+    max-width: 92%;
+  }
+}

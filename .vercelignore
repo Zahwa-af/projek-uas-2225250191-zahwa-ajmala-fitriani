@@ -5,3 +5,6 @@ __pycache__/
 backend/tests/
 backend/data/*.db
 docs/
+web-statis/
+.env
+.env.*

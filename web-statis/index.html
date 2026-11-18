@@ -1,0 +1,40 @@
+<title>SegiPintar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Belajar segitiga langkah demi langkah untuk siswa SMP.">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/dasar.css">
+<link rel="stylesheet" href="css/komponen.css">
+<style>
+  /* Penyesuaian versi online: celah sisi & area aman layar HP. */
+  .kepala {
+    top: env(safe-area-inset-top, 0px);
+    padding-top: 10px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--surface);
+  }
+  main {
+    padding-block: 16px 32px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .memuat {
+    color: var(--text-muted);
+  }
+</style>
+
+<header class="kepala">
+  <a href="#/" class="merek">SegiPintar</a>
+  <span id="nama-siswa" class="nama-siswa"></span>
+</header>
+<main id="app" tabindex="-1">
+  <p class="memuat">Memuat SegiPintar…</p>
+</main>
+<script type="module" src="js/main.js"></script>

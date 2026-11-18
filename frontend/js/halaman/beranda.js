@@ -6,6 +6,7 @@ const MENU = [
   ["#/belajar", "Belajar", "Kenali jenis, alas, tinggi, keliling, dan luas segitiga."],
   ["#/latihan", "Latihan", "Tunjuk tinggi segitiga dan pilah informasi soal cerita."],
   ["#/misi", "Misi Segitiga", "4 misi literasi matematika di sekolah."],
+  ["#/asisten", "Pembimbing AI", "Tanya rumus, konsep, atau minta soal dihitung langsung."],
   ["#/hasil", "Hasilku", "Lihat skor, bintang, dan lencanamu."],
 ];
 

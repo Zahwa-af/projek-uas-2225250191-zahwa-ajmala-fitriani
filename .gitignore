@@ -5,3 +5,9 @@ __pycache__/
 .ruff_cache/
 backend/data/*.db
 backend/data/*.db-journal
+
+# Rahasia: API key & konfigurasi lokal. JANGAN pernah di-commit.
+.env
+.env.*
+!.env.example
+.venv/

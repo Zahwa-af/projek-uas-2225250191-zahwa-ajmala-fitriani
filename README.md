@@ -58,6 +58,27 @@ python backend/app.py
 #    http://<IP-laptop>:5000      contoh: http://192.168.1.10:5000
 ```
 
+## Chatbot "Tanya Pembimbing" (DeepSeek) — tahap backend
+
+Kode ada di `backend/asisten/` dan `backend/api/routes_asisten.py`. Endpoint: `GET /api/asisten/status`, `POST /api/asisten/pesan`. Panel di halaman Misi **belum dibuat**.
+
+- API key **hanya** dibaca server dari `.env` (lokal) atau Environment Variables (Vercel). File `.env` diabaikan git.
+- Mode lewat `SEGIPINTAR_ASISTEN`: `deepseek` | `tiruan` (tanpa internet, untuk mencoba) | `mati`.
+- Ke DeepSeek tidak dikirim nama, sesi, atau kode siswa. Nama, email, dan nomor di pertanyaan siswa disamarkan dulu.
+- Percakapan dicatat di tabel `percakapan_asisten` dengan kode anonim. Chatbot tidak mengubah skor.
+- Tes memakai klien tiruan dan tidak pernah memanggil API sungguhan.
+
+Cara mengaktifkan di laptop: salin `.env.example` menjadi `.env`, isi `DEEPSEEK_API_KEY` dan `SEGIPINTAR_RAHASIA_ANONIM`, lalu jalankan ulang `python backend/app.py`.
+
+## Versi online (tanpa server)
+
+Folder [web-statis/](web-statis/) berisi versi yang berjalan sepenuhnya di browser, sehingga bisa dibuka lewat link di HP tanpa laptop menyala. Tampilannya memakai `frontend/` yang sama. Hanya `js/api.js` yang diganti dengan "server mini" di browser (`web-statis/js/lokal/`), dan bank soal tetap dari `backend/data/soal/`.
+
+- Logika penilaian di `web-statis/js/lokal/` adalah terjemahan JavaScript dari `backend/segitiga/`. Python tetap sumber utamanya.
+- Setiap kali logika Python diubah, jalankan uji kesetaraan:
+  `python web-statis/uji_kesetaraan.py | node web-statis/uji_kesetaraan.mjs`
+- Progres siswa tersimpan di HP masing-masing (localStorage). Rekap guru hanya ada di versi server.
+
 ## Struktur folder (rencana)
 
 ```
