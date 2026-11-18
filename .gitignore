@@ -11,3 +11,4 @@ backend/data/*.db-journal
 .env.*
 !.env.example
 .venv/
+referensi_rmt/

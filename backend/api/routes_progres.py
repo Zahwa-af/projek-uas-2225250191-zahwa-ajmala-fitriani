@@ -8,7 +8,7 @@ from collections import Counter
 
 from flask import Blueprint, current_app, jsonify
 
-from segitiga import bank_soal
+from segitiga import bank_soal, rmt
 from segitiga.penilai import kategori_literasi
 
 from .keamanan import catat_pin_salah, pin_terkunci
@@ -83,14 +83,18 @@ def rekap_guru():
         if not any(m["selesai"] for m in misi):
             continue
         total = sum(m["skor"] or 0 for m in misi)
-        kode = Counter(
-            r["kode_diagnosis"]
-            for r in conn.execute(
-                "SELECT j.kode_diagnosis FROM jawaban_langkah j "
-                "JOIN main_misi m ON m.id = j.main_id "
-                "WHERE m.sesi_id = ? AND j.benar = 0 AND j.kode_diagnosis IS NOT NULL",
-                (s["id"],),
-            )
+        salah = conn.execute(
+            "SELECT j.kode_diagnosis, j.langkah, m.misi_id FROM jawaban_langkah j "
+            "JOIN main_misi m ON m.id = j.main_id "
+            "WHERE m.sesi_id = ? AND j.benar = 0 AND j.kode_diagnosis IS NOT NULL",
+            (s["id"],),
+        ).fetchall()
+        kode = Counter(r["kode_diagnosis"] for r in salah)
+        # RMT Tahap 1: fase kognitif yang paling sering bermasalah (dihitung dari data lama).
+        fase = Counter(
+            f
+            for r in salah
+            if (f := rmt.fase_kesalahan(r["kode_diagnosis"], r["misi_id"], r["langkah"]))
         )
         petunjuk = conn.execute(
             "SELECT COUNT(*) AS n FROM petunjuk_dibuka p JOIN main_misi m ON m.id = p.main_id "
@@ -113,6 +117,7 @@ def rekap_guru():
                 "kategori": kategori_literasi(total),
                 "petunjuk_dibuka": petunjuk,
                 "kesalahan_terbanyak": [k for k, _ in kode.most_common(3)],
+                "fase_kesulitan": {f: fase.get(f, 0) for f in rmt.SEMUA_FASE},
                 "refleksi": refleksi,
             }
         )

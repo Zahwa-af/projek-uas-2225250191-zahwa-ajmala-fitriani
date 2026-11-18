@@ -65,6 +65,13 @@ KASUS = [
         "definisi benar: ketiga sisi sama panjang, sudut 60°",
     ),
     ("E", "e", "Apa ibu kota Indonesia?", [r"Jakarta|Nusantara"], "jawaban langsung sesuai fakta"),
+    (
+        "F",
+        "f",
+        "Apa rumus keliling segitiga?",
+        [r"s₁\s*\+\s*s₂\s*\+\s*s₃|a\s*\+\s*b\s*\+\s*c|jumlah\w*\s+(ketiga|semua|panjang)"],
+        "rumus keliling (jumlah ketiga sisi), dijelaskan langsung",
+    ),
 ]
 
 

@@ -13,7 +13,7 @@ from asisten.klien import GalatLLM, HasilLLM, KlienLLM
 from asisten.konfigurasi import KonfigurasiAsisten
 from asisten.pengaman import larangan, menyuruh_siswa_menghitung, periksa_balasan
 from asisten.prompt import StatusSiswa, susun_pesan, susun_pesan_beranda
-from segitiga import bank_soal
+from segitiga import bank_soal, rmt
 from segitiga.penilai import periksa_langkah
 
 from .umum import GalatApi, ambil_main, data_json, koneksi, sekarang, teks_wajib
@@ -208,6 +208,8 @@ _KOLOM = (
     "percobaan_salah",
     "tingkat_petunjuk",
     "kode_diagnosis",
+    "tahap_rmt",
+    "fase_kognitif",
     "sumber",
     "model",
     "token_masuk",
@@ -291,6 +293,9 @@ def kirim_pesan():
         "percobaan_salah": status_siswa.percobaan_salah,
         "tingkat_petunjuk": status_siswa.tingkat_petunjuk,
         "kode_diagnosis": status_siswa.kode_terakhir,
+        # Label RMT untuk data penelitian (Tahap 1). Tidak memengaruhi isi balasan.
+        "tahap_rmt": rmt.tahap_langkah(main["misi_id"], no),
+        "fase_kognitif": rmt.fase_kesalahan(status_siswa.kode_terakhir, main["misi_id"], no),
     }
 
     _simpan(

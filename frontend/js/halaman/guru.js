@@ -59,6 +59,7 @@ function tampilkan(wadah, data) {
             el("th", {}, "Kategori"),
             el("th", {}, "Petunjuk"),
             el("th", {}, "Kesalahan terbanyak"),
+            el("th", { title: "Jumlah jawaban salah per fase kognitif RMT: Input / Elaborasi / Output" }, "Fase sulit (I/E/O)"),
           ),
         ),
         el(
@@ -81,11 +82,25 @@ function tampilkan(wadah, data) {
               el("td", {}, s.kategori),
               el("td", {}, String(s.petunjuk_dibuka)),
               el("td", {}, s.kesalahan_terbanyak.map((k) => LABEL_KESALAHAN[k] ?? k).join(", ") || "–"),
+              el("td", {}, teksFase(s.fase_kesulitan)),
             ),
           ),
         ),
       ),
     ),
     el("p", { class: "teks-redup" }, `Misi: ${data.judul_misi.map((j, i) => `M${i + 1} ${j}`).join(" · ")}`),
+    el(
+      "p",
+      { class: "teks-redup" },
+      "Fase sulit (RMT): jumlah jawaban salah pada fase Input (mengumpulkan informasi) / " +
+        "Elaborasi (mengolah, memilih rumus) / Output (menyatakan hasil, satuan, ketelitian). " +
+        "Pemetaan masih usulan peneliti.",
+    ),
   );
+}
+
+// Data lama (sebelum fitur ini) tidak punya fase_kesulitan: tampilkan tanda strip.
+function teksFase(fase) {
+  if (!fase) return "–";
+  return `${fase.input ?? 0} / ${fase.elaborasi ?? 0} / ${fase.output ?? 0}`;
 }

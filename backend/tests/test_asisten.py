@@ -293,7 +293,7 @@ def test_endpoint_alur_dan_log_anonim(tmp_path):
     assert rows[0]["disamarkan"] == 1 and "Zahra" not in rows[0]["teks"]
     assert rows[0]["kode_anonim"] == kode_anonim(sesi_id, "garam")
     assert rows[0]["kode_diagnosis"] == "LUPA_SETENGAH" and rows[0]["percobaan_salah"] == 1
-    assert rows[1]["sumber"] == "tiruan" and rows[1]["tahap_rmt"] is None
+    assert rows[1]["sumber"] == "tiruan" and rows[1]["tahap_rmt"] == "manipulasi"  # RMT Tahap 1
     semua = json.dumps([dict(r) for r in rows], ensure_ascii=False)
     assert "Zahra" not in semua and sesi_id not in semua
 
