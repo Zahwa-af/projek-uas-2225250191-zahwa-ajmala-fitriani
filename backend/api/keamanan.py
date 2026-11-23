@@ -91,6 +91,8 @@ def catat_pin_salah() -> None:
 _JALUR_DIBATASI = {
     ("POST", "/api/asisten/"): "asisten",
     ("POST", "/api/sesi"): "sesi",
+    ("POST", "/api/rmt/"): "aktivitas",
+    ("POST", "/api/latihan/"): "aktivitas",
 }
 
 
@@ -99,6 +101,7 @@ def pasang_keamanan(app: Any) -> None:
     app.extensions[KUNCI_EKSTENSI] = {
         "asisten": PembatasLaju(c["BATAS_ASISTEN_PER_IP"], c["BATAS_ASISTEN_DETIK"]),
         "sesi": PembatasLaju(c["BATAS_SESI_PER_IP"], c["BATAS_SESI_DETIK"]),
+        "aktivitas": PembatasLaju(c["BATAS_AKTIVITAS_PER_IP"], c["BATAS_AKTIVITAS_DETIK"]),
         "gagal_pin": PembatasLaju(c["BATAS_GAGAL_PIN"], c["BATAS_GAGAL_PIN_DETIK"]),
     }
 

@@ -28,6 +28,16 @@ Pengujian terdiri dari **(A) pengujian teknis** (apakah aplikasi bekerja benar) 
 | Mode privat browser | Aplikasi tetap jalan walau `localStorage` gagal |
 | Drag-and-drop dengan jari | Pilah Informasi bisa dipakai di layar sentuh |
 
+### A2b. Uji tampilan otomatis (Edge headless, Tahap 2)
+
+Skrip ada di `backend/tests/e2e/` dan dijalankan manual pada server uji dengan database sementara. Hasil terakhir dicatat di [15-status-tahap2.md](15-status-tahap2.md).
+
+| Skrip | Isi |
+|---|---|
+| `uji_rmt_misi.mjs` | Layar RMT misi 1–2, lewati, skor tetap, konten RMT gagal dimuat |
+| `uji_cognitive_load.mjs` | Fading naik/tetap/turun, petunjuk, penjelasan diri, remedial, panel Pembimbing, mode gelap |
+| `uji_misi_1_4.mjs` | Semua layar RMT misi 1–4 di HP dan laptop, remedial, HP bersama (butuh `SEGIPINTAR_MISI_BEBAS=1`) |
+
 ### A3. Uji kepatuhan desain (sebelum uji coba siswa)
 Periksa setiap layar terhadap 9 aturan desain di [CLAUDE.md](../CLAUDE.md). Satu layar = satu baris checklist.
 

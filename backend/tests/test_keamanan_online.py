@@ -125,8 +125,10 @@ def test_kiriman_terlalu_besar_ditolak(tmp_path):
 def test_wsgi_membuat_aplikasi_produksi(tmp_path, monkeypatch):
     monkeypatch.setenv("SEGIPINTAR_DB_PATH", str(tmp_path / "online.db"))
     monkeypatch.setenv("SEGIPINTAR_PIN_GURU", "guruonline1")
-    monkeypatch.delenv("SEGIPINTAR_PRODUKSI", raising=False)
-    monkeypatch.delenv("SEGIPINTAR_DI_BELAKANG_PROXY", raising=False)
+    # wsgi.py memakai os.environ.setdefault. Nilai diset lewat monkeypatch agar DIKEMBALIKAN
+    # setelah tes; tanpa ini mode produksi "bocor" ke tes-tes berikutnya.
+    monkeypatch.setenv("SEGIPINTAR_PRODUKSI", "1")
+    monkeypatch.setenv("SEGIPINTAR_DI_BELAKANG_PROXY", "1")
     monkeypatch.syspath_prepend(str(AKAR))
     sys.modules.pop("wsgi", None)
     wsgi = importlib.import_module("wsgi")

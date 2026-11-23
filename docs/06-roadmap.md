@@ -43,7 +43,7 @@ Tandai `[x]` setiap tugas yang selesai. ID fitur (F-xx) merujuk ke [01-analisis-
 - [x] Animasi konsep: tinggi turun tegak lurus; segitiga = ½ persegi panjang
 - [x] Mini-game Tunjuk Tingginya (F-02) — lancip, siku-siku, tumpul
 - [x] Mini-game Pilah Informasi (F-05) — 3 soal dengan angka pengecoh
-- [x] Contoh bertahap soal cerita (F-09, versi worked example; belum ada fading ke soal kosong)
+- [x] Contoh bertahap soal cerita (F-09) + fading: Soal Cerita Bertahap tingkat 1–4 (Tahap 2C)
 - [x] Panel "Ingat lagi" operasi hitung, muncul saat salah hitung (F-04)
 - [ ] Tombol "Cek langkahku" (F-10)
 
@@ -60,6 +60,15 @@ Tandai `[x]` setiap tugas yang selesai. ID fitur (F-xx) merujuk ke [01-analisis-
 - [ ] Uji coba dengan 5–10 siswa
 - [ ] Analisis data (skor, petunjuk, diagnosis, angket)
 - [ ] Revisi berdasarkan temuan
+
+## Tahap 8 — Integrasi RMT (rincian: [13-rencana-implementasi-tahap2.md](13-rencana-implementasi-tahap2.md))
+- [x] Tahap 1 — fondasi RMT (pemetaan tahap & fase kesalahan, log pembimbing)
+- [x] Tahap 2A — backend aktivitas RMT: `rmt_misi.json`, `aktivitas_rmt.py`, `/api/rmt/*`, tabel `aktivitas_rmt`
+- [x] Tahap 2B — frontend: tujuan & makna, Tebak dulu, Susun rencana, Tata informasi, Cek hasil, Di mana lagi?, refleksi dengan kalimat pembuka; semua bisa dilewati, skor tetap 6/6
+- [x] Tahap 2C — Cognitive Load: Soal Cerita Bertahap (fading), remedial adaptif dari diagnosis aplikasi, layar Bandingkan keliling–luas, panel Pembimbing tertutup bawaan ([14-cognitive-load-tahap2c.md](14-cognitive-load-tahap2c.md)). Setara rencana 2G di dokumen 13; rencana 2C–2E lama sudah tercakup di 2B. ⚠️ Belum berdasarkan hasil uji coba instrumen.
+- [x] Tahap 2F — chatbot misi dengan mediasi RMT: tingkat bantuan 0–3 dari server, fokus tahap/fase, prinsip MLE; jawaban akhir tetap tidak disebut ([15-status-tahap2.md](15-status-tahap2.md))
+- [x] Perbaikan audit: HP bersama, refleksi disamarkan, rate limit endpoint baru, remedial percobaan terakhir, `web-statis`
+- [ ] Uji langsung oleh mahasiswa: chatbot dengan model sungguhan, HP sungguhan, halaman guru ([15](15-status-tahap2.md) §5)
 
 ## Keputusan terbuka (perlu dikonfirmasi)
 1. **Skor & petunjuk:** apakah petunjuk tingkat 2 mengurangi skor rubrik? (Implementasi saat ini: tidak; hanya tingkat 3 yang membuat skor tahap 0.)

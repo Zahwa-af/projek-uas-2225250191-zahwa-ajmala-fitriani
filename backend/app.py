@@ -30,7 +30,13 @@ except ImportError:  # python-dotenv opsional; Vercel memakai Environment Variab
     pass
 
 import db  # noqa: E402
-from api import routes_asisten, routes_periksa, routes_progres, routes_soal  # noqa: E402
+from api import (  # noqa: E402
+    routes_asisten,
+    routes_periksa,
+    routes_progres,
+    routes_rmt,
+    routes_soal,
+)
 from api.keamanan import pasang_keamanan  # noqa: E402
 from api.umum import daftarkan_penangan_galat  # noqa: E402
 from asisten.klien import buat_klien  # noqa: E402
@@ -81,6 +87,10 @@ def buat_app(konfigurasi: dict[str, Any] | None = None) -> Flask:
         BATAS_ASISTEN_DETIK=10 * 60,
         BATAS_SESI_PER_IP=30,
         BATAS_SESI_DETIK=60 * 60,
+        # Aktivitas tanpa skor (respons RMT, latihan). Longgar karena satu kelas bisa berbagi
+        # satu IP sekolah; tujuannya menahan banjir otomatis, bukan membatasi siswa.
+        BATAS_AKTIVITAS_PER_IP=900,
+        BATAS_AKTIVITAS_DETIK=10 * 60,
         BATAS_GAGAL_PIN=5,
         BATAS_GAGAL_PIN_DETIK=15 * 60,
     )
@@ -114,6 +124,7 @@ def buat_app(konfigurasi: dict[str, Any] | None = None) -> Flask:
     app.register_blueprint(routes_periksa.bp)
     app.register_blueprint(routes_progres.bp)
     app.register_blueprint(routes_asisten.bp)
+    app.register_blueprint(routes_rmt.bp)  # aktivitas pendamping RMT (tanpa skor)
 
     @app.get("/")
     def beranda():  # type: ignore[no-untyped-def]

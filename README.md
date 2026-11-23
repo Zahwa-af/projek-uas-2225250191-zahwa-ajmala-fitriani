@@ -29,6 +29,10 @@ Rincian lengkap ada di [docs/01-analisis-kebutuhan.md](docs/01-analisis-kebutuha
 | **Game "Misi Segitiga"** — 4 misi literasi matematika sesuai kisi-kisi | Mengukur & melatih mathematical literacy |
 | **Petunjuk 3 tingkat** dan **umpan balik per langkah** | Scaffolding & menunjuk letak kesalahan (GL03, DS02) |
 | **Laporan hasil** dengan skor rubrik per tahapan | Evaluasi siswa & guru |
+| **Aktivitas RMT** di setiap misi (tanpa skor): tujuan, Tebak dulu, Susun rencana, Tata informasi, Cek hasil, Di mana lagi?, refleksi terpandu | Rigorous Mathematical Thinking |
+| **Soal Cerita Bertahap** — bantuan berkurang 4 tingkat (fading), naik/turun sesuai hasil siswa | Germane load, transisi dari contoh ke mandiri (GL01, GL03) |
+| **Saran remedial** dari kesalahan siswa sendiri, dengan tautan ke materi/latihan | Tahu bagian mana yang salah (DS02, IL05) |
+| **Pembimbing AI** (OpenRouter/DeepSeek): beranda menjawab langsung; di misi membimbing bertahap sesuai tahap RMT tanpa menyebut jawaban | Bantuan sesuai kesulitan |
 
 ## Teknologi
 
@@ -106,6 +110,13 @@ projek uas awa/
 4. [Game & Bank Soal](docs/04-game-dan-soal.md)
 5. [Rencana Pengujian](docs/05-rencana-pengujian.md)
 6. [Roadmap](docs/06-roadmap.md)
+7. [Analisis RMT](docs/07-analisis-rmt.md)
+8. [Checklist Dokumen Penelitian](docs/09-checklist-dokumen-penelitian.md)
+9. [Audit Mathematical Literacy](docs/10-audit-mathematical-literacy.md)
+10. [Audit RMT](docs/12-audit-rmt.md)
+11. [Rencana Implementasi Tahap 2](docs/13-rencana-implementasi-tahap2.md)
+12. [Cognitive Load Tahap 2C](docs/14-cognitive-load-tahap2c.md)
+13. [Status Tahap 2 dan hasil pengujian](docs/15-status-tahap2.md)
 
 ## Penyusun
 

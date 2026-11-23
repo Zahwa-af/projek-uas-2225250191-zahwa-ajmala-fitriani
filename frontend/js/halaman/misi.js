@@ -1,9 +1,18 @@
 // Game "Misi Segitiga" (F-15): cerita → satu langkah per layar → ringkasan → refleksi → skor.
 
+import {
+  buatStatusAktivitas,
+  elAktivitas,
+  elTujuanMakna,
+  lewatiAktivitas,
+  periksaAktivitas,
+  tombolAktivitas,
+} from "../aktivitas-rmt.js";
 import { api } from "../api.js";
 import { barBawah, bintangTeks, el, fmt, kotakUmpan, tombol } from "../dom.js";
 import { elPesanChat } from "../format-pesan.js";
 import { buatKomponen } from "../langkah.js";
+import { elRemedial } from "../remedial.js";
 import { gambar } from "../segitiga-svg.js";
 import { ambilSesi, simpanSesi } from "../state.js";
 import { INGAT_LAGI, LENCANA_IKON } from "../teks.js";
@@ -63,6 +72,23 @@ export async function halamanMisi(app, idTeks) {
     mulai = await api.mulaiMisi(id, sesi.sesi_id);
   }
 
+  // Aktivitas pendamping RMT (tanpa skor). Jika gagal dimuat, misi tetap berjalan seperti biasa.
+  let rmt = null;
+  try {
+    const konten = await api.rmtMisi(id);
+    rmt = {
+      konten,
+      status: Object.fromEntries(konten.aktivitas.map((a) => [a.id, buatStatusAktivitas(a)])),
+    };
+  } catch {
+    rmt = null;
+  }
+  const idTahap = (tahap) => rmt?.konten.aktivitas.find((a) => a.tahap === tahap)?.id ?? null;
+  const RMT_PRA = ["input", "perencanaan", "representasi"].map(idTahap).filter(Boolean);
+  const RMT_VALIDASI = idTahap("validasi");
+  const RMT_TRANSENDENSI = idTahap("transendensi");
+  const RMT_REFLEKSI = rmt?.konten.aktivitas.find((a) => a.tahap === "refleksi") ?? null;
+
   const st = {
     mainId: mulai.main_id,
     layar: "cerita",
@@ -72,7 +98,10 @@ export async function halamanMisi(app, idTeks) {
     hasil: null,
     kunciLayar: null,
     chat: [],
-chatSibuk: false,
+    chatSibuk: false,
+    chatTerbuka: null, // null = ikuti bawaan (tertutup sampai ada percakapan)
+    remedial: null,
+    rmtId: null, // aktivitas RMT yang sedang tampil (layar "rmt")
   };
   st.langkah = misi.langkah.map((lk) => ({
     komponen: buatKomponen(lk, { kirim: () => periksa() }),
@@ -86,12 +115,13 @@ chatSibuk: false,
   }));
 
   function render(fokus = null) {
-    const kunci = `${st.layar}-${st.i}`;
+    const kunci = `${st.layar}-${st.i}-${st.rmtId}`;
     const pindahLayar = kunci !== st.kunciLayar;
     st.kunciLayar = kunci;
     app.replaceChildren();
     const layar = {
       cerita: layarCerita,
+      rmt: layarRmt,
       langkah: layarLangkah,
       ringkasan: layarRingkasan,
       refleksi: layarRefleksi,
@@ -144,8 +174,12 @@ chatSibuk: false,
             })
           : null,
         tombol(
-          semua ? "Mulai langkah 1" : "Lanjut",
+          semua && !RMT_PRA.length ? "Mulai langkah 1" : "Lanjut",
           () => {
+            if (semua && RMT_PRA.length) {
+              keRmt(RMT_PRA[0]);
+              return;
+            }
             if (semua) {
               st.layar = "langkah";
               st.i = 0;
@@ -156,6 +190,74 @@ chatSibuk: false,
           },
           true,
         ),
+      ),
+    );
+  }
+
+  // ---------- layar aktivitas RMT (tanpa skor, boleh dilewati)
+  function keRmt(idAktivitas) {
+    st.layar = "rmt";
+    st.rmtId = idAktivitas;
+    render();
+  }
+
+  function posisiRmt() {
+    const urut = RMT_PRA.indexOf(st.rmtId);
+    if (urut >= 0) return `Misi ${misi.id} · Sebelum mengerjakan (${urut + 1} dari ${RMT_PRA.length})`;
+    if (st.rmtId === RMT_VALIDASI) return `Misi ${misi.id} · Setelah mengerjakan`;
+    return `Misi ${misi.id} · Setelah misi`;
+  }
+
+  function majuDariRmt() {
+    const urut = RMT_PRA.indexOf(st.rmtId);
+    if (urut >= 0 && urut < RMT_PRA.length - 1) return keRmt(RMT_PRA[urut + 1]);
+    if (urut >= 0) {
+      st.layar = "langkah";
+      st.i = 0;
+      st.rmtId = null;
+      return render();
+    }
+    if (st.rmtId === RMT_VALIDASI) return selesaiMisi();
+    st.layar = "refleksi"; // setelah transendensi
+    st.rmtId = null;
+    return render();
+  }
+
+  function mundurDariRmt() {
+    const urut = RMT_PRA.indexOf(st.rmtId);
+    if (urut > 0) return keRmt(RMT_PRA[urut - 1]);
+    if (urut === 0) {
+      st.layar = "cerita";
+    } else if (st.rmtId === RMT_VALIDASI) {
+      st.layar = "langkah";
+      st.i = misi.langkah.length - 1;
+    } else {
+      st.layar = "ringkasan"; // dari transendensi
+    }
+    st.rmtId = null;
+    return render();
+  }
+
+  function layarRmt() {
+    const s = rmt.status[st.rmtId];
+    const pembuka = st.rmtId === RMT_PRA[0] ? elTujuanMakna(rmt.konten) : null;
+    app.append(
+      ...elAktivitas(s, { posisi: posisiRmt(), pembuka }),
+      barBawah(
+        tombol("Kembali", mundurDariRmt, false, { disabled: s.sibuk || st.sibuk }),
+        ...tombolAktivitas(s, {
+          periksa: async () => {
+            const tugas = periksaAktivitas(api, st.mainId, s);
+            render(); // tampilkan tombol nonaktif selama mengirim
+            await tugas;
+            render(".umpan");
+          },
+          lewati: async () => {
+            await lewatiAktivitas(api, st.mainId, s);
+            majuDariRmt();
+          },
+          lanjut: majuDariRmt,
+        }),
       ),
     );
   }
@@ -234,6 +336,7 @@ chatSibuk: false,
       ),
       barBawah(
         tombol("Kembali", () => {
+          if (st.i === 0 && RMT_PRA.length) return keRmt(RMT_PRA[RMT_PRA.length - 1]);
           if (st.i === 0) st.layar = "cerita";
           else st.i -= 1;
           render();
@@ -290,10 +393,18 @@ function panelPembimbing(lk) {
     }
   };
 
+  // Tertutup secara bawaan agar perhatian tidak terbagi (extraneous load); terbuka bila
+  // siswa membukanya atau sudah ada percakapan.
   return el(
-    "section",
-    { class: "kartu" },
-    el("h2", {}, "Pembimbing AI SegiPintar"),
+    "details",
+    {
+      class: "kartu panel-pembimbing",
+      open: st.chatTerbuka ?? st.chat.length > 0,
+      ontoggle: (e) => {
+        st.chatTerbuka = e.currentTarget.open;
+      },
+    },
+    el("summary", {}, "Tanya Pembimbing AI"),
     el(
       "p",
       { class: "teks-redup" },
@@ -364,12 +475,24 @@ function panelPembimbing(lk) {
       render();
       return;
     }
+    if (RMT_VALIDASI) return keRmt(RMT_VALIDASI); // "Cek hasilmu" sebelum misi diselesaikan
+    return selesaiMisi();
+  }
+
+  async function selesaiMisi() {
     st.sibuk = true;
     try {
       st.hasil = await api.selesai(st.mainId);
+      try {
+        st.remedial = await api.remedial(sesi.sesi_id, st.mainId); // hanya saran, skor tetap
+      } catch {
+        st.remedial = null;
+      }
       st.layar = "ringkasan";
+      st.rmtId = null;
     } catch (e) {
-      const s = st.langkah[st.i];
+      // Tampilkan galat di layar yang sedang aktif (langkah terakhir atau "Cek hasilmu").
+      const s = st.layar === "rmt" ? rmt.status[st.rmtId] : st.langkah[st.i];
       s.umpan = e.message;
       s.jenisUmpan = "info";
     } finally {
@@ -395,6 +518,7 @@ function panelPembimbing(lk) {
         tombol(
           "Lanjut",
           () => {
+            if (RMT_TRANSENDENSI) return keRmt(RMT_TRANSENDENSI); // "Di mana lagi?"
             st.layar = "refleksi";
             render();
           },
@@ -411,21 +535,42 @@ function panelPembimbing(lk) {
       st.layar = "hasil";
       render();
     };
+    // Kalimat pembuka refleksi terpandu (RMT) — dari backend, bukan ditulis di frontend.
+    const pembuka = RMT_REFLEKSI?.kalimat_pembuka?.length
+      ? el(
+          "div",
+          { class: "kartu kartu-tujuan" },
+          el("p", {}, el("strong", {}, "Boleh mulai dengan:")),
+          el("ul", { class: "kalimat-pembuka" }, RMT_REFLEKSI.kalimat_pembuka.map((k) => el("li", {}, k))),
+        )
+      : ""; // bukan null: append() asli menulis null sebagai teks "null"
     app.append(
       el("h1", { tabindex: "-1" }, "Jelaskan ke temanmu"),
       el("p", {}, "Bayangkan temanmu belum paham misi ini. Tulis caranya dengan kalimatmu sendiri."),
+      pembuka,
       el("label", { for: "refleksi" }, "Penjelasanmu (boleh dilewati)"),
       area,
       barBawah(
-        tombol("Lewati", keHasil),
+        tombol("Lewati", async () => {
+          if (RMT_REFLEKSI) {
+            await lewatiAktivitas(api, st.mainId, rmt.status[RMT_REFLEKSI.id]);
+          }
+          keHasil();
+        }),
         tombol(
           "Kirim",
-          async () => {
+          async (e) => {
+            if (st.sibuk) return; // cegah ketukan ganda menyimpan refleksi dua kali
+            st.sibuk = true;
+            e.currentTarget.disabled = true;
+            const teks = area.value.trim();
             try {
-              await api.refleksi(st.mainId, area.value);
+              await api.refleksi(st.mainId, area.value); // tetap dipakai rekap guru
+              if (RMT_REFLEKSI && teks) await api.rmtRespons(st.mainId, RMT_REFLEKSI.id, { teks });
             } catch {
               /* refleksi opsional; tetap lanjut */
             }
+            st.sibuk = false;
             keHasil();
           },
           true,
@@ -460,6 +605,7 @@ function panelPembimbing(lk) {
         ),
       ),
       el("p", { class: "teks-redup" }, "Skor suatu tahap menjadi 0 jika petunjuk ke-3 (cara lengkap) dibuka."),
+      elRemedial(st.remedial?.saran, { judul: "Perkuat dulu bagian ini" }) ?? "",
       barBawah(
         el("a", { class: "tombol", href: "#/misi" }, "Daftar misi"),
         misi.id < 4

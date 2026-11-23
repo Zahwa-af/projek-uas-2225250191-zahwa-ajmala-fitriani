@@ -153,6 +153,7 @@ export const TOPIK = [
         teks: ["Satu segitiga adalah setengah dari persegi panjang.", "Jadi, luas segitiga = setengah dari alas × tinggi."],
         rumus: "L = ½ × alas × tinggi",
         gambar: () => gambar({ tipe: "segitiga", alas: 6, tinggi: 4, puncak: 0.4, tanpa_angka: true }),
+        catatan: "Coba jelaskan dengan kalimatmu: mengapa dikali ½? Lihat lagi layar sebelumnya bila ragu.",
       },
       {
         judul: "Contoh luas",
@@ -168,6 +169,26 @@ export const TOPIK = [
         ],
         gambar: () => gambar({ tipe: "persegi_panjang_dibagi", alas: 10, tinggi: 6, satuan: "cm" }),
         catatan: "10 × 6 = 60 cm² adalah persegi panjang. Segitiganya hanya 30 cm².",
+      },
+      {
+        // Perbandingan konsep (Germane): keliling vs luas pada SATU segitiga yang sama.
+        judul: "Bandingkan keliling dan luas",
+        teks: [
+          "Keliling mengukur panjang tepi. Semua sisi dijumlahkan.",
+          "Luas mengukur daerah di dalam. Hanya alas dan tinggi yang dipakai.",
+        ],
+        langkah: ["Keliling = 8 + 6 + 10 = 24 cm", "Luas = ½ × 8 × 6 = 24 cm²"],
+        // Alas biru & tinggi oranye (aturan warna); sisi miring disebut di keterangan gambar.
+        gambar: () =>
+          gambar({
+            tipe: "segitiga",
+            alas: 8,
+            tinggi: 6,
+            puncak: 0,
+            satuan: "cm",
+            judul: "Segitiga siku-siku dengan sisi miring 10 cm",
+          }),
+        catatan: "Angkanya sama-sama 24, tetapi satuannya beda. Coba jelaskan ke temanmu: mengapa sisi miring tidak dipakai untuk luas?",
       },
     ],
   },
@@ -244,9 +265,10 @@ export function halamanTopik(app, tTeks, lTeks = "1") {
           "a",
           {
             class: "tombol tombol-utama",
-            href: terakhirSemua ? "#/latihan" : terakhirTopik ? `#/belajar/${t + 1}/1` : `#/belajar/${t}/${l + 1}`,
+            // Setelah contoh lengkap (worked example) → latihan dengan bantuan yang berkurang (fading).
+            href: terakhirSemua ? "#/latihan/bertahap" : terakhirTopik ? `#/belajar/${t + 1}/1` : `#/belajar/${t}/${l + 1}`,
           },
-          terakhirSemua ? "Ke latihan" : terakhirTopik ? "Topik berikutnya" : "Lanjut",
+          terakhirSemua ? "Coba sendiri" : terakhirTopik ? "Topik berikutnya" : "Lanjut",
         ),
       ),
     );

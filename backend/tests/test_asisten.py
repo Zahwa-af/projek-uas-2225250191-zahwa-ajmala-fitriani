@@ -181,10 +181,12 @@ def test_prompt_riwayat_dibatasi():
     assert len(pesan) == 1 + 8 + 1
 
 
-def test_tahapan_rmt_belum_diisi():
-    from asisten import prompt
+def test_tahapan_rmt_berisi_prinsip_mediasi_hanya_untuk_misi():
+    # Tahap 2F: prinsip MLE dipakai chatbot misi; kerangka masih usulan (docs/07, Q1).
+    from asisten import mediasi, prompt
 
-    assert prompt.TAHAPAN_RMT is None  # menunggu keputusan dosen (docs/07, Q1)
+    assert prompt.TAHAPAN_RMT == mediasi.PRINSIP_MEDIASI
+    assert prompt.TAHAPAN_RMT not in prompt.INSTRUKSI_BERANDA
 
 
 def test_teks_kunci_semua_langkah():

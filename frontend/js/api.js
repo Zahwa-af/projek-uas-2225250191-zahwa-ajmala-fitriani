@@ -101,6 +101,27 @@ export const api = {
       pilihan,
     }),
 
+  // Soal Cerita Bertahap (fading, tanpa skor). Kunci tetap di server.
+  soalBertahap: (tingkat) =>
+    minta("GET", `/api/latihan/bertahap?tingkat=${encodeURIComponent(tingkat)}`),
+
+  periksaBertahap: (seed, tingkat, isian, jawaban) =>
+    minta("POST", "/api/latihan/bertahap/periksa", { seed, tingkat, isian, jawaban }),
+
+  petunjukBertahap: (seed, tingkat, isian, ke) =>
+    minta("POST", "/api/latihan/bertahap/petunjuk", { seed, tingkat, isian, ke }),
+
+  selesaiBertahap: (seed, tingkat, salah, petunjuk) =>
+    minta("POST", "/api/latihan/bertahap/selesai", { seed, tingkat, salah, petunjuk }),
+
+  // Saran remedial dari kesalahan siswa sendiri (hanya membaca, skor tidak berubah).
+  remedial: (sesiId, mainId = null) =>
+    minta(
+      "GET",
+      `/api/remedial/${encodeURIComponent(sesiId)}` +
+        (mainId ? `?main_id=${encodeURIComponent(mainId)}` : ""),
+    ),
+
   statusAsisten: () =>
     minta("GET", "/api/asisten/status"),
 
@@ -117,6 +138,24 @@ export const api = {
     minta("POST", "/api/asisten/beranda", {
       sesi_id: sesiId,
       teks,
+    }),
+
+  // Aktivitas pendamping RMT (tanpa skor). Konten dari backend/data/soal/rmt_misi.json.
+  rmtMisi: (misiId) =>
+    minta("GET", `/api/rmt/misi/${misiId}`),
+
+  rmtRespons: (mainId, aktivitas, jawaban) =>
+    minta("POST", "/api/rmt/respons", {
+      main_id: mainId,
+      aktivitas,
+      jawaban,
+    }),
+
+  rmtLewati: (mainId, aktivitas) =>
+    minta("POST", "/api/rmt/respons", {
+      main_id: mainId,
+      aktivitas,
+      dilewati: true,
     }),
 
   guru: (kodeKelas, pin) =>

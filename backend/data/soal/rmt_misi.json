@@ -1,0 +1,374 @@
+[
+  {
+    "misi_id": 1,
+    "tujuan": "Membandingkan luas dua bendera segitiga, lalu memilih desain dengan alasan matematis.",
+    "makna": "Dengan menghitung luas, panitia tahu desain mana yang cukup dengan kain yang ada, bukan sekadar menebak dari bentuknya.",
+    "aktivitas": [
+      {
+        "id": "tebak",
+        "jenis": "prediksi",
+        "tahap": "input",
+        "pertanyaan": "Sebelum menghitung, tebak dulu: bendera mana yang butuh kain lebih banyak?",
+        "opsi": [
+          { "id": "a", "teks": "Desain A (alas 60 cm, tinggi 40 cm)" },
+          { "id": "b", "teks": "Desain B (alas 80 cm, tinggi 30 cm)" },
+          { "id": "c", "teks": "Sama banyak" }
+        ],
+        "jawaban_sebenarnya": "c",
+        "umpan_balik": "Tebakanmu sudah dicatat. Nanti kita cek dengan perhitungan."
+      },
+      {
+        "id": "rencana",
+        "jenis": "urutan",
+        "tahap": "perencanaan",
+        "instruksi": "Susun rencanamu: urutkan langkah penyelesaiannya.",
+        "kartu": [
+          { "id": "m", "teks": "Hitung luas Desain A" },
+          { "id": "k", "teks": "Hitung luas Desain B" },
+          { "id": "t", "teks": "Bandingkan kedua luas" },
+          { "id": "b", "teks": "Pilih desain dan beri alasan" }
+        ],
+        "kunci": [["m", "k", "t", "b"], ["k", "m", "t", "b"]],
+        "penjelasan": "Tepat! Hitung luas kedua desain dulu, bandingkan, baru putuskan dengan alasan."
+      },
+      {
+        "id": "representasi",
+        "jenis": "pilihan",
+        "tahap": "representasi",
+        "pertanyaan": "Cara mana yang paling membantu untuk membandingkan kedua desain?",
+        "opsi": [
+          { "id": "a", "teks": "Membandingkan panjang alasnya saja" },
+          { "id": "b", "teks": "Tabel berisi alas, tinggi, dan luas setiap desain" },
+          { "id": "c", "teks": "Menjumlahkan alas dan tinggi setiap desain" }
+        ],
+        "kunci": "b",
+        "umpan_balik_opsi": {
+          "a": "Alas saja belum cukup. Luas bergantung pada alas dan tinggi.",
+          "c": "Menjumlahkan alas dan tinggi tidak menghasilkan luas."
+        },
+        "penjelasan": "Tepat! Tabel menata data sehingga kedua desain mudah dibandingkan."
+      },
+      {
+        "id": "validasi",
+        "jenis": "pilihan",
+        "tahap": "validasi",
+        "pertanyaan": "Luas Desain A = 1.200 cm². Apakah hasil ini masuk akal?",
+        "opsi": [
+          { "id": "a", "teks": "Ya, karena 1.200 cm² lebih kecil dari 60 × 40 = 2.400 cm²" },
+          { "id": "b", "teks": "Tidak, luasnya harus sama dengan 2.400 cm²" },
+          { "id": "c", "teks": "Tidak, luasnya harus lebih besar dari 2.400 cm²" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "2.400 cm² adalah luas persegi panjang dengan alas dan tinggi yang sama.",
+          "c": "Segitiga muat di dalam persegi panjangnya, jadi luasnya tidak mungkin lebih besar."
+        },
+        "penjelasan": "Tepat! Segitiga adalah setengah persegi panjang, jadi luasnya pasti lebih kecil dari alas × tinggi."
+      },
+      {
+        "id": "refleksi",
+        "jenis": "teks",
+        "tahap": "refleksi",
+        "instruksi": "Jelaskan caramu dengan kalimatmu sendiri.",
+        "kalimat_pembuka": ["Pertama, aku ...", "Lalu, aku ...", "Jadi, desain yang dipilih ... karena ..."]
+      },
+      {
+        "id": "transendensi",
+        "jenis": "pilihan_banyak",
+        "tahap": "transendensi",
+        "pertanyaan": "Di mana lagi cara \"bandingkan luasnya dulu\" bisa dipakai? Pilih 2.",
+        "opsi": [
+          { "id": "a", "teks": "Memilih potongan karton segitiga yang cukup untuk prakarya" },
+          { "id": "b", "teks": "Menentukan kebun segitiga mana yang perlu pupuk lebih banyak" },
+          { "id": "c", "teks": "Menghitung banyak siswa di kelas" },
+          { "id": "d", "teks": "Menentukan warna bendera" }
+        ],
+        "kunci": ["a", "b"],
+        "umpan_balik_opsi": {
+          "c": "Menghitung banyak siswa tidak memakai luas.",
+          "d": "Warna bendera tidak bergantung pada luas."
+        },
+        "penjelasan": "Tepat! Setiap kali harus memilih yang butuh bahan paling banyak, bandingkan luasnya."
+      }
+    ]
+  },
+  {
+    "misi_id": 2,
+    "tujuan": "Mengubah cerita kanopi menjadi model matematika untuk menghitung luas kain dan biayanya.",
+    "makna": "Model matematika membantu sekolah memperkirakan biaya sebelum membeli, sehingga uang tidak terbuang.",
+    "aktivitas": [
+      {
+        "id": "tebak",
+        "jenis": "prediksi",
+        "tahap": "input",
+        "pertanyaan": "Tebak dulu: kira-kira berapa biaya kain untuk 4 kanopi?",
+        "opsi": [
+          { "id": "a", "teks": "Kurang dari Rp100.000" },
+          { "id": "b", "teks": "Antara Rp100.000 dan Rp500.000" },
+          { "id": "c", "teks": "Lebih dari Rp500.000" }
+        ],
+        "jawaban_sebenarnya": "b",
+        "umpan_balik": "Tebakanmu sudah dicatat. Nanti kita cek dengan perhitungan."
+      },
+      {
+        "id": "rencana",
+        "jenis": "urutan",
+        "tahap": "perencanaan",
+        "instruksi": "Susun rencanamu: urutkan langkah penyelesaiannya.",
+        "kartu": [
+          { "id": "r", "teks": "Hitung luas 1 kanopi" },
+          { "id": "d", "teks": "Kalikan luas 1 kanopi dengan 4" },
+          { "id": "h", "teks": "Kalikan luas seluruh kain dengan harga per m²" }
+        ],
+        "kunci": [["r", "d", "h"]],
+        "penjelasan": "Tepat! Luas 1 kanopi → luas seluruh kain → biaya."
+      },
+      {
+        "id": "representasi",
+        "jenis": "pilihan",
+        "tahap": "representasi",
+        "pertanyaan": "Model matematika mana yang tepat untuk biaya seluruh kain?",
+        "opsi": [
+          { "id": "a", "teks": "4 × (½ × 3 × 2) × 25.000" },
+          { "id": "b", "teks": "4 × (3 × 2) × 25.000" },
+          { "id": "c", "teks": "4 × (3 + 2) × 25.000" },
+          { "id": "d", "teks": "½ × 3 × 2 × 25.000" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "Model ini lupa ½. Luas segitiga adalah setengah dari alas × tinggi.",
+          "c": "Alas dan tinggi dikalikan, bukan dijumlahkan.",
+          "d": "Model ini hanya untuk 1 kanopi. Ada 4 kanopi."
+        },
+        "penjelasan": "Tepat! 4 kanopi × luas satu kanopi (½ × 3 × 2) × harga per m²."
+      },
+      {
+        "id": "validasi",
+        "jenis": "pilihan",
+        "tahap": "validasi",
+        "pertanyaan": "Biaya kain Rp300.000. Bagaimana cara cepat mengecek hasil ini?",
+        "opsi": [
+          { "id": "a", "teks": "1 kanopi butuh 3 m² × Rp25.000 = Rp75.000, dan 4 × Rp75.000 = Rp300.000" },
+          { "id": "b", "teks": "Biayanya seharusnya Rp75.000 saja" },
+          { "id": "c", "teks": "Biayanya seharusnya 2 kali lipat, yaitu Rp600.000" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "Rp75.000 hanya untuk 1 kanopi.",
+          "c": "Rp600.000 muncul jika lupa ½ pada rumus luas."
+        },
+        "penjelasan": "Tepat! Menghitung dengan cara lain dan mendapat hasil yang sama membuat jawaban lebih meyakinkan."
+      },
+      {
+        "id": "refleksi",
+        "jenis": "teks",
+        "tahap": "refleksi",
+        "instruksi": "Jelaskan caramu dengan kalimatmu sendiri.",
+        "kalimat_pembuka": ["Pertama, aku ...", "Lalu, aku ...", "Jadi, biaya kainnya ... karena ..."]
+      },
+      {
+        "id": "transendensi",
+        "jenis": "pilihan_banyak",
+        "tahap": "transendensi",
+        "pertanyaan": "Model \"luas × banyak × harga\" bisa dipakai untuk apa lagi? Pilih 2.",
+        "opsi": [
+          { "id": "a", "teks": "Menghitung biaya cat untuk 6 papan nama segitiga" },
+          { "id": "b", "teks": "Menghitung biaya kertas untuk 10 hiasan segitiga" },
+          { "id": "c", "teks": "Mengukur tinggi badan siswa" },
+          { "id": "d", "teks": "Menghitung banyak hari dalam seminggu" }
+        ],
+        "kunci": ["a", "b"],
+        "umpan_balik_opsi": {
+          "c": "Tinggi badan diukur, bukan dihitung dengan luas dan harga.",
+          "d": "Banyak hari dalam seminggu tidak memakai luas."
+        },
+        "penjelasan": "Tepat! Setiap biaya bahan untuk beberapa benda bisa memakai model yang sama."
+      }
+    ]
+  },
+  {
+    "misi_id": 3,
+    "tujuan": "Memakai rumus luas segitiga dan pecahan untuk membagi taman menjadi bagian bunga dan rumput.",
+    "makna": "Tukang kebun perlu tahu luas setiap bagian agar bibit bunga dan rumput yang dibeli pas.",
+    "aktivitas": [
+      {
+        "id": "tebak",
+        "jenis": "prediksi",
+        "tahap": "input",
+        "pertanyaan": "Tebak dulu: bagian mana yang lebih luas?",
+        "opsi": [
+          { "id": "a", "teks": "Bagian bunga" },
+          { "id": "b", "teks": "Bagian rumput" },
+          { "id": "c", "teks": "Sama luas" }
+        ],
+        "jawaban_sebenarnya": "b",
+        "umpan_balik": "Tebakanmu sudah dicatat. Nanti kita cek dengan perhitungan."
+      },
+      {
+        "id": "rencana",
+        "jenis": "urutan",
+        "tahap": "perencanaan",
+        "instruksi": "Susun rencanamu: urutkan langkah penyelesaiannya.",
+        "kartu": [
+          { "id": "s", "teks": "Hitung luas seluruh taman" },
+          { "id": "c", "teks": "Hitung luas bunga: ⅓ dari luas taman" },
+          { "id": "n", "teks": "Hitung luas rumput: sisa taman" }
+        ],
+        "kunci": [["s", "c", "n"]],
+        "penjelasan": "Tepat! Hitung keseluruhan dulu, lalu bagian bunga, lalu sisanya."
+      },
+      {
+        "id": "representasi",
+        "jenis": "pilihan",
+        "tahap": "representasi",
+        "pertanyaan": "Gambaran mana yang tepat untuk taman ini?",
+        "opsi": [
+          { "id": "a", "teks": "Taman dibagi 3 bagian sama besar: 1 bagian bunga, 2 bagian rumput" },
+          { "id": "b", "teks": "Taman dibagi 4 bagian: 1 bagian bunga, 3 bagian rumput" },
+          { "id": "c", "teks": "Taman dibagi 2: setengah bunga, setengah rumput" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "⅓ berarti 1 dari 3 bagian sama besar, bukan 1 dari 4.",
+          "c": "Bunga hanya ⅓ bagian, bukan setengah."
+        },
+        "penjelasan": "Tepat! ⅓ bunga berarti sisanya ⅔ rumput."
+      },
+      {
+        "id": "validasi",
+        "jenis": "pilihan",
+        "tahap": "validasi",
+        "pertanyaan": "Bunga 14 m² dan rumput 28 m². Bagaimana cara mengecek hasil ini?",
+        "opsi": [
+          { "id": "a", "teks": "14 + 28 = 42 m², sama dengan luas seluruh taman" },
+          { "id": "b", "teks": "14 + 28 harus sama dengan 12 × 7 = 84 m²" },
+          { "id": "c", "teks": "Luas rumput harus sama dengan luas bunga" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "84 m² adalah alas × tinggi tanpa ½. Luas taman adalah 42 m².",
+          "c": "Rumput menempati ⅔ taman, jadi lebih luas dari bunga."
+        },
+        "penjelasan": "Tepat! Jika semua bagian dijumlahkan, hasilnya harus sama dengan keseluruhan."
+      },
+      {
+        "id": "refleksi",
+        "jenis": "teks",
+        "tahap": "refleksi",
+        "instruksi": "Jelaskan caramu dengan kalimatmu sendiri.",
+        "kalimat_pembuka": ["Pertama, aku ...", "Lalu, aku ...", "Jadi, luas bunga ... dan luas rumput ..."]
+      },
+      {
+        "id": "transendensi",
+        "jenis": "pilihan_banyak",
+        "tahap": "transendensi",
+        "pertanyaan": "Cara \"hitung keseluruhan, lalu ambil bagiannya\" bisa dipakai untuk apa lagi? Pilih 2.",
+        "opsi": [
+          { "id": "a", "teks": "Lahan sekolah berbentuk segitiga, ¼ bagiannya untuk parkir" },
+          { "id": "b", "teks": "Spanduk segitiga, ½ bagiannya diberi warna merah" },
+          { "id": "c", "teks": "Menghitung keliling kelas" },
+          { "id": "d", "teks": "Mengukur berat tas" }
+        ],
+        "kunci": ["a", "b"],
+        "umpan_balik_opsi": {
+          "c": "Keliling tidak membagi luas menjadi beberapa bagian.",
+          "d": "Berat tas tidak berhubungan dengan luas."
+        },
+        "penjelasan": "Tepat! Setiap kali sebagian dari luas dipakai untuk keperluan lain, caranya sama."
+      }
+    ]
+  },
+  {
+    "misi_id": 4,
+    "tujuan": "Menilai apakah hitungan orang lain benar dan menarik kesimpulan yang tepat dari hasilnya.",
+    "makna": "Memeriksa hitungan mencegah kesalahan saat membeli bahan dan melatihmu tidak langsung percaya pada hasil.",
+    "aktivitas": [
+      {
+        "id": "tebak",
+        "jenis": "prediksi",
+        "tahap": "input",
+        "pertanyaan": "Tebak dulu: menurutmu hitungan Dika benar?",
+        "opsi": [
+          { "id": "a", "teks": "Benar" },
+          { "id": "b", "teks": "Salah" },
+          { "id": "c", "teks": "Belum yakin" }
+        ],
+        "jawaban_sebenarnya": "b",
+        "umpan_balik": "Tebakanmu sudah dicatat. Nanti kita cek dengan perhitungan."
+      },
+      {
+        "id": "rencana",
+        "jenis": "urutan",
+        "tahap": "perencanaan",
+        "instruksi": "Susun rencanamu: urutkan langkah penyelesaiannya.",
+        "kartu": [
+          { "id": "w", "teks": "Lihat cara yang dipakai Dika" },
+          { "id": "e", "teks": "Tulis rumus luas segitiga yang benar" },
+          { "id": "p", "teks": "Hitung luas yang benar" },
+          { "id": "a", "teks": "Bandingkan dengan hasil Dika, lalu simpulkan" }
+        ],
+        "kunci": [["w", "e", "p", "a"], ["e", "w", "p", "a"]],
+        "penjelasan": "Tepat! Periksa cara Dika dan rumus yang benar, hitung ulang, lalu bandingkan."
+      },
+      {
+        "id": "representasi",
+        "jenis": "pilihan",
+        "tahap": "representasi",
+        "pertanyaan": "Gambaran mana yang menjelaskan kesalahan Dika?",
+        "opsi": [
+          { "id": "a", "teks": "Persegi panjang 2,4 m × 1,5 m dibagi garis diagonal menjadi 2 segitiga sama besar" },
+          { "id": "b", "teks": "Segitiga dengan alas 1,5 m dan tinggi 2,4 m" },
+          { "id": "c", "teks": "Dua persegi panjang yang ditumpuk" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "Menukar alas dan tinggi tidak menjelaskan kesalahan Dika.",
+          "c": "Dika menghitung satu persegi panjang, bukan dua."
+        },
+        "penjelasan": "Tepat! 2,4 × 1,5 adalah luas persegi panjang, yang berisi 2 segitiga."
+      },
+      {
+        "id": "validasi",
+        "jenis": "pilihan",
+        "tahap": "validasi",
+        "pertanyaan": "Luas yang benar 1,8 m². Bagaimana cara mengecek hubungannya dengan hasil Dika?",
+        "opsi": [
+          { "id": "a", "teks": "1,8 × 2 = 3,6, sama dengan hasil Dika yang lupa ½" },
+          { "id": "b", "teks": "1,8 harus lebih besar dari 3,6" },
+          { "id": "c", "teks": "1,8 + 1,5 = 3,3" }
+        ],
+        "kunci": "a",
+        "umpan_balik_opsi": {
+          "b": "Luas segitiga lebih kecil dari luas persegi panjangnya.",
+          "c": "Menambahkan tinggi tidak ada hubungannya dengan pengecekan luas."
+        },
+        "penjelasan": "Tepat! Hasil Dika tepat 2 kali luas yang benar, karena ½ tidak dipakai."
+      },
+      {
+        "id": "refleksi",
+        "jenis": "teks",
+        "tahap": "refleksi",
+        "instruksi": "Jelaskan caramu dengan kalimatmu sendiri.",
+        "kalimat_pembuka": ["Pertama, aku ...", "Lalu, aku ...", "Jadi, hitungan Dika ... karena ..."]
+      },
+      {
+        "id": "transendensi",
+        "jenis": "pilihan_banyak",
+        "tahap": "transendensi",
+        "pertanyaan": "Kebiasaan memeriksa hitungan berguna untuk apa lagi? Pilih 2.",
+        "opsi": [
+          { "id": "a", "teks": "Mengecek total belanja di struk" },
+          { "id": "b", "teks": "Memeriksa ukuran kain sebelum membeli" },
+          { "id": "c", "teks": "Memilih lagu kesukaan" },
+          { "id": "d", "teks": "Menebak cuaca besok" }
+        ],
+        "kunci": ["a", "b"],
+        "umpan_balik_opsi": {
+          "c": "Memilih lagu tidak memerlukan hitungan.",
+          "d": "Menebak cuaca bukan memeriksa hitungan."
+        },
+        "penjelasan": "Tepat! Memeriksa ulang hitungan berguna setiap kali hasilnya dipakai untuk mengambil keputusan."
+      }
+    ]
+  }
+]

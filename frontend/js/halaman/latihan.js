@@ -7,6 +7,7 @@ import { buatPilah } from "../pilah-info.js";
 
 export function halamanDaftarLatihan(app) {
   const menu = [
+    ["#/latihan/bertahap", "Soal Cerita Bertahap", "Bantuan berkurang sedikit demi sedikit saat kamu makin paham."],
     ["#/latihan/tinggi", "Tunjuk Tingginya", "Pilih garis yang merupakan tinggi segitiga."],
     ["#/latihan/pilah", "Pilah Informasi", "Pisahkan informasi yang dipakai dan yang tidak."],
   ];

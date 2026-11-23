@@ -6,8 +6,9 @@ Ada dua chatbot dengan instruksi yang TERPISAH (perubahan satu tidak memengaruhi
 - MISI (panel di langkah misi yang DINILAI): tidak menyebut jawaban akhir langkah misi
   yang sedang dikerjakan (keputusan penelitian; juga dijaga pengaman.py di server).
 
-TAHAPAN RMT SENGAJA BELUM DIISI. Tempatnya adalah `TAHAPAN_RMT` dan baru diisi setelah
-dosen menetapkan kerangka tahapan (docs/07-analisis-rmt.md, pertanyaan Q1).
+Sejak Tahap 2F, chatbot MISI memakai mediasi RMT dari asisten/mediasi.py (prinsip MLE,
+fokus tahap/fase, tingkat bantuan 0–3 yang ditentukan server). Kerangkanya masih usulan
+peneliti, belum dikonfirmasi dosen (docs/07 Q1). Chatbot BERANDA tidak berubah.
 """
 
 from __future__ import annotations
@@ -18,9 +19,11 @@ from typing import Any
 from segitiga.parser_angka import format_angka
 
 from .klien import Pesan
+from .mediasi import PRINSIP_MEDIASI, instruksi_mediasi
+from .mediasi import tingkat_bantuan as _tingkat_bantuan
 
-# Diisi setelah tahapan RMT dikonfirmasi dosen. JANGAN diisi dengan tebakan.
-TAHAPAN_RMT: str | None = None
+# Prinsip mediasi RMT untuk chatbot misi (usulan peneliti; lihat asisten/mediasi.py).
+TAHAPAN_RMT: str | None = PRINSIP_MEDIASI
 
 RIWAYAT_MAKS = 8  # jumlah pesan terakhir (siswa + pembimbing) yang ikut dikirim
 
@@ -223,16 +226,25 @@ def konteks_soal(misi: dict[str, Any], langkah: dict[str, Any], status: StatusSi
     return "\n".join(baris)
 
 
+def tingkat_bantuan(status: StatusSiswa) -> int:
+    """Tingkat bantuan 0–3 untuk chatbot misi; ditentukan server dari status siswa."""
+    return _tingkat_bantuan(status.sudah_benar, status.percobaan_salah, status.tingkat_petunjuk)
+
+
 def susun_pesan(
     misi: dict[str, Any],
     langkah: dict[str, Any],
     status: StatusSiswa,
     riwayat: list[Pesan],
     pertanyaan: str,
+    tahap: str | None = None,
+    fase: str | None = None,
 ) -> list[Pesan]:
+    """Pesan chatbot misi: aturan + mediasi RMT (tahap, fase, tingkat bantuan) + konteks soal."""
     sistem = ATURAN_PEMBIMBING
     if TAHAPAN_RMT:
         sistem += "\n\n" + TAHAPAN_RMT
+        sistem += "\n\n" + instruksi_mediasi(tingkat_bantuan(status), tahap, fase)
     sistem += "\n\n" + konteks_soal(misi, langkah, status)
     return [
         {"role": "system", "content": sistem},

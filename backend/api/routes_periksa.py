@@ -6,6 +6,7 @@ import json
 
 from flask import Blueprint, jsonify
 
+from asisten.anonim import samarkan
 from segitiga import bank_soal
 from segitiga.penilai import (
     BATAS_PERCOBAAN,
@@ -220,6 +221,14 @@ def refleksi():
     main = ambil_main(data.get("main_id"))
     teks = str(data.get("teks") or "").strip()[:1000]
     if teks:
+        # Samarkan data pribadi (nama panggilan, email, nomor HP) sebelum disimpan, sama
+        # seperti respons RMT, agar tidak ada salinan teks asli di database.
+        sesi = (
+            koneksi()
+            .execute("SELECT nama_panggilan FROM sesi WHERE id = ?", (main["sesi_id"],))
+            .fetchone()
+        )
+        teks, _ = samarkan(teks, sesi["nama_panggilan"] if sesi else None)
         koneksi().execute(
             "INSERT INTO refleksi (main_id, teks, waktu) VALUES (?, ?, ?)",
             (main["id"], teks, sekarang()),

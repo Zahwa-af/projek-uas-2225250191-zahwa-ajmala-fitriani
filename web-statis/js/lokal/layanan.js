@@ -290,4 +290,23 @@ export const api = {
         403,
       );
     }),
+
+  // Fitur Tahap 2 (RMT, Soal Cerita Bertahap, remedial) memakai logika Python dan belum
+  // diterjemahkan ke versi statis. Halaman misi melewati aktivitas RMT bila gagal dimuat,
+  // saran remedial disembunyikan, dan latihan bertahap memberi pesan yang jelas.
+  rmtMisi: () => jalankan(() => {
+    throw new GalatApi("Aktivitas RMT hanya ada di versi server.", 404);
+  }),
+  rmtRespons: () => jalankan(() => {
+    throw new GalatApi("Aktivitas RMT hanya ada di versi server.", 404);
+  }),
+  rmtLewati: () => jalankan(() => ({ tercatat: false, dilewati: true })),
+  remedial: () => jalankan(() => ({ saran: [], ada_data: false })),
+  soalBertahap: () => jalankan(() => {
+    throw new GalatApi(
+      "Soal Cerita Bertahap hanya ada di versi server (python backend/app.py). Coba latihan lain dulu.",
+      404,
+    );
+  }),
 };
+for (const nama of ["periksaBertahap", "petunjukBertahap", "selesaiBertahap"]) api[nama] = api.soalBertahap;

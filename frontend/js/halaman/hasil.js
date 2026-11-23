@@ -1,5 +1,6 @@
 import { api } from "../api.js";
 import { barBawah, bintangTeks, el, fmt } from "../dom.js";
+import { elRemedial } from "../remedial.js";
 import { ambilSesi } from "../state.js";
 import { LENCANA_IKON } from "../teks.js";
 
@@ -7,6 +8,12 @@ export async function halamanHasil(app) {
   const sesi = ambilSesi();
   const p = await api.progres(sesi.sesi_id);
   const adaSelesai = p.misi.some((m) => m.selesai);
+  let remedial = null;
+  try {
+    remedial = await api.remedial(sesi.sesi_id);
+  } catch {
+    /* saran penguatan bersifat tambahan; halaman tetap tampil */
+  }
 
   app.append(
     el("h1", { tabindex: "-1" }, "Hasilku"),
@@ -19,6 +26,7 @@ export async function halamanHasil(app) {
           el("p", {}, "Kategori: ", el("strong", {}, p.kategori)),
         )
       : el("p", {}, "Belum ada misi yang selesai. Yuk mulai dari Misi 1!"),
+    elRemedial(remedial?.saran) ?? "", // append() asli menulis null sebagai teks
     el("h2", {}, "Per misi"),
     el(
       "div",

@@ -12,7 +12,7 @@ from asisten.anonim import kode_anonim, samarkan
 from asisten.klien import GalatLLM, HasilLLM, KlienLLM
 from asisten.konfigurasi import KonfigurasiAsisten
 from asisten.pengaman import larangan, menyuruh_siswa_menghitung, periksa_balasan
-from asisten.prompt import StatusSiswa, susun_pesan, susun_pesan_beranda
+from asisten.prompt import StatusSiswa, susun_pesan, susun_pesan_beranda, tingkat_bantuan
 from segitiga import bank_soal, rmt
 from segitiga.penilai import periksa_langkah
 
@@ -208,6 +208,7 @@ _KOLOM = (
     "percobaan_salah",
     "tingkat_petunjuk",
     "kode_diagnosis",
+    "tingkat_bantuan",
     "tahap_rmt",
     "fase_kognitif",
     "sumber",
@@ -275,6 +276,8 @@ def kirim_pesan():
     teks_aman, disamarkan = samarkan(teks, sesi["nama_panggilan"] if sesi else None)
 
     status_siswa = _status_siswa(main["id"], langkah)
+    tahap = rmt.tahap_langkah(main["misi_id"], no)
+    fase = rmt.fase_kesalahan(status_siswa.kode_terakhir, main["misi_id"], no)
 
     pesan = susun_pesan(
         misi,
@@ -282,6 +285,8 @@ def kirim_pesan():
         status_siswa,
         _riwayat(main["id"], no),
         teks_aman,
+        tahap=tahap,
+        fase=fase,
     )
 
     umum = {
@@ -293,9 +298,10 @@ def kirim_pesan():
         "percobaan_salah": status_siswa.percobaan_salah,
         "tingkat_petunjuk": status_siswa.tingkat_petunjuk,
         "kode_diagnosis": status_siswa.kode_terakhir,
-        # Label RMT untuk data penelitian (Tahap 1). Tidak memengaruhi isi balasan.
-        "tahap_rmt": rmt.tahap_langkah(main["misi_id"], no),
-        "fase_kognitif": rmt.fase_kesalahan(status_siswa.kode_terakhir, main["misi_id"], no),
+        # Label RMT (Tahap 1); sejak Tahap 2F juga dipakai untuk mediasi di instruksi model.
+        "tahap_rmt": tahap,
+        "fase_kognitif": fase,
+        "tingkat_bantuan": tingkat_bantuan(status_siswa),
     }
 
     _simpan(

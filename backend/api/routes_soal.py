@@ -7,7 +7,7 @@ import uuid
 
 from flask import Blueprint, current_app, jsonify, request
 
-from segitiga import bank_soal, generator_soal
+from segitiga import bank_soal, fading, generator_soal
 from segitiga.penilai import periksa_langkah
 
 from .umum import GalatApi, data_json, koneksi, sekarang
@@ -181,4 +181,70 @@ def periksa_latihan_tinggi():
             seed,
             str(data.get("pilihan") or ""),
         )
+    )
+
+
+# ------------------------------------------------------------------
+# LATIHAN SOAL CERITA BERTAHAP (fading, tanpa skor) — Tahap 2C
+# ------------------------------------------------------------------
+
+
+def _seed_tingkat(data: dict) -> tuple[int, int]:
+    try:
+        seed = int(data.get("seed"))
+    except (TypeError, ValueError) as e:
+        raise GalatApi("Soal tidak valid.") from e
+    return seed, fading.normalkan_tingkat(data.get("tingkat"))
+
+
+@bp.get("/latihan/bertahap")
+def latihan_bertahap():
+    seed = request.args.get("seed", type=int)
+    if seed is None:
+        seed = random.randint(1, 1_000_000)
+    return jsonify(fading.soal_publik(seed, request.args.get("tingkat")))
+
+
+@bp.post("/latihan/bertahap/periksa")
+def periksa_latihan_bertahap():
+    data = data_json()
+    seed, tingkat = _seed_tingkat(data)
+    jawaban = data.get("jawaban")
+    if not isinstance(jawaban, dict):
+        raise GalatApi("Jawaban tidak valid.")
+    try:
+        hasil = fading.periksa(seed, tingkat, str(data.get("isian") or ""), jawaban)
+    except ValueError as e:
+        raise GalatApi(str(e)) from e
+    return jsonify({"benar": hasil.benar, "kode": hasil.kode, "umpan_balik": hasil.umpan_balik})
+
+
+@bp.post("/latihan/bertahap/petunjuk")
+def petunjuk_latihan_bertahap():
+    data = data_json()
+    seed, tingkat = _seed_tingkat(data)
+    try:
+        return jsonify(fading.petunjuk(seed, tingkat, str(data.get("isian") or ""), data.get("ke")))
+    except ValueError as e:
+        raise GalatApi(str(e)) from e
+
+
+@bp.post("/latihan/bertahap/selesai")
+def selesai_latihan_bertahap():
+    """Keputusan fading untuk soal berikutnya + pertanyaan penjelasan diri. Tidak disimpan."""
+    data = data_json()
+    seed, tingkat = _seed_tingkat(data)
+    try:
+        salah = int(data.get("salah") or 0)
+        petunjuk = int(data.get("petunjuk") or 0)
+    except (TypeError, ValueError) as e:
+        raise GalatApi("Data latihan tidak valid.") from e
+    k = fading.tingkat_berikut(tingkat, salah, petunjuk)
+    return jsonify(
+        {
+            "tingkat_berikut": k.tingkat,
+            "arah": k.arah,
+            "pesan": k.pesan,
+            "refleksi": fading.refleksi(seed, tingkat),
+        }
     )

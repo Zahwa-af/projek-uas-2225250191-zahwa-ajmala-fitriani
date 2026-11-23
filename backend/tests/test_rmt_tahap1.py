@@ -94,7 +94,8 @@ def test_log_chatbot_misi_berisi_tahap_dan_fase(tmp_path):
         ("manipulasi", "elaborasi"),
         ("manipulasi", "elaborasi"),
     ]
-    assert all(x["tingkat_bantuan"] is None for x in rows)  # diisi di tahap chatbot RMT (Tahap 6)
+    # Tahap 2F: tingkat bantuan diisi server (1 kali salah → tingkat 1).
+    assert [x["tingkat_bantuan"] for x in rows] == [1, 1]
 
 
 def test_log_chatbot_misi_tanpa_kesalahan_fase_kosong(tmp_path):

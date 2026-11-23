@@ -8,6 +8,7 @@ import { halamanDaftarBelajar, halamanTopik } from "./halaman/belajar.js";
 import { halamanGuru } from "./halaman/guru.js";
 import { halamanHasil } from "./halaman/hasil.js";
 import { halamanDaftarLatihan, halamanLatihanPilah, halamanLatihanTinggi } from "./halaman/latihan.js";
+import { halamanLatihanBertahap } from "./halaman/latihan-bertahap.js";
 import { halamanDaftarMisi, halamanMisi } from "./halaman/misi.js";
 import { ambilSesi, hapusSesi } from "./state.js";
 
@@ -22,6 +23,7 @@ const RUTE = [
   [/^\/latihan$/, halamanDaftarLatihan, true],
   [/^\/latihan\/tinggi$/, halamanLatihanTinggi, true],
   [/^\/latihan\/pilah$/, halamanLatihanPilah, true],
+  [/^\/latihan\/bertahap$/, halamanLatihanBertahap, true],
   [/^\/misi$/, halamanDaftarMisi, true],
   [/^\/misi\/(\d+)$/, halamanMisi, true],
   [/^\/asisten$/, halamanAsisten, true],

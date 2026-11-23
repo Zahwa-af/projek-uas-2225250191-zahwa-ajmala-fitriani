@@ -97,6 +97,22 @@ CREATE TABLE IF NOT EXISTS percakapan_beranda (
     waktu TEXT NOT NULL
 );
 
+-- Respons aktivitas pendamping RMT (Tahap 2A). TIDAK memengaruhi skor rubrik.
+-- Tanpa nama siswa: hanya kode anonim. Teks bebas disamarkan sebelum disimpan.
+CREATE TABLE IF NOT EXISTS aktivitas_rmt (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    main_id TEXT NOT NULL REFERENCES main_misi(id),
+    kode_anonim TEXT NOT NULL,
+    misi_id INTEGER NOT NULL,
+    aktivitas TEXT NOT NULL,
+    tahap_rmt TEXT NOT NULL,
+    percobaan_ke INTEGER NOT NULL,
+    jawaban TEXT,
+    dilewati INTEGER NOT NULL DEFAULT 0,
+    benar INTEGER,
+    waktu TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_main_sesi
 ON main_misi(sesi_id);
 
@@ -111,6 +127,9 @@ ON percakapan_asisten(main_id, langkah);
 
 CREATE INDEX IF NOT EXISTS idx_beranda_sesi
 ON percakapan_beranda(sesi_id, id);
+
+CREATE INDEX IF NOT EXISTS idx_aktivitas_rmt_main
+ON aktivitas_rmt(main_id, aktivitas);
 """
 
 

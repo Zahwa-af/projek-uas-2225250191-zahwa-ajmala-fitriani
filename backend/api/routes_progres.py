@@ -6,9 +6,9 @@ import hmac
 import uuid
 from collections import Counter
 
-from flask import Blueprint, current_app, jsonify
+from flask import Blueprint, current_app, jsonify, request
 
-from segitiga import bank_soal, rmt
+from segitiga import bank_soal, remedial, rmt
 from segitiga.penilai import kategori_literasi
 
 from .keamanan import catat_pin_salah, pin_terkunci
@@ -60,6 +60,50 @@ def progres(sesi_id: str):
             "lencana": [m["lencana"] for m in misi if (m["skor"] or 0) >= 4],
         }
     )
+
+
+@bp.get("/remedial/<sesi_id>")
+def saran_remedial(sesi_id: str):
+    """Saran penguatan dari kesalahan siswa sendiri (hanya membaca; skor tidak berubah).
+
+    ?main_id=… membatasi pada satu kali main misi (layar hasil misi).
+    Tanpa main_id (Hasilku): hanya percobaan TERAKHIR tiap misi yang sudah berisi jawaban,
+    agar saran hilang setelah siswa berhasil memperbaiki dirinya saat mengulang misi.
+    """
+    conn = koneksi()
+    if conn.execute("SELECT 1 FROM sesi WHERE id = ?", (sesi_id,)).fetchone() is None:
+        raise GalatApi("Sesi tidak ditemukan.", 404)
+    main_id = request.args.get("main_id")
+    if main_id:
+        dipakai = [main_id]
+    else:
+        terakhir: dict[int, str] = {}
+        for r in conn.execute(
+            "SELECT m.id, m.misi_id FROM main_misi m WHERE m.sesi_id = ? AND EXISTS "
+            "(SELECT 1 FROM jawaban_langkah j WHERE j.main_id = m.id) ORDER BY m.mulai, m.rowid",
+            (sesi_id,),
+        ):
+            terakhir[r["misi_id"]] = r["id"]
+        dipakai = list(terakhir.values())
+    if not dipakai:
+        return jsonify({"saran": [], "ada_data": False})
+    tanda = ", ".join("?" for _ in dipakai)
+    syarat, param = f"m.sesi_id = ? AND m.id IN ({tanda})", [sesi_id, *dipakai]
+    salah = conn.execute(
+        "SELECT j.kode_diagnosis, m.misi_id, j.langkah FROM jawaban_langkah j "
+        f"JOIN main_misi m ON m.id = j.main_id WHERE {syarat} AND j.benar = 0",
+        param,
+    ).fetchall()
+    lengkap = conn.execute(
+        "SELECT m.misi_id, p.langkah FROM petunjuk_dibuka p "
+        f"JOIN main_misi m ON m.id = p.main_id WHERE {syarat} AND p.tingkat >= 3",
+        param,
+    ).fetchall()
+    saran = remedial.saran(
+        [(r["kode_diagnosis"], r["misi_id"], r["langkah"]) for r in salah],
+        [(r["misi_id"], r["langkah"]) for r in lengkap],
+    )
+    return jsonify({"saran": saran, "ada_data": bool(salah or lengkap)})
 
 
 @bp.post("/guru")
